@@ -62,10 +62,10 @@ If you haven't set any of the WP fail2ban constants, you don't need to do anythi
 This constant has been replaced by the `wp_fail2ban_redux_openlog_facility` filter. This filter is passed a second parameter with the action being taken.
 
 **`WP_FAIL2BAN_SYSLOG_SHORT_TAG` and `WP_FAIL2BAN_HTTP_HOST`**
-These two constants are used by WP fail2ban to create a tag for the system log (something like *wordpress(example.com)*). The short tag is now enforced, and two constants are merged into one filter, `wp_fail2ban_redux_openlog_indent`. This filter will recieve a value like *wp(example.com)*.
+These two constants are used by WP fail2ban to create a tag for the system log (something like *wordpress(example.com)*). The short tag is now enforced, and two constants are merged into one filter, `wp_fail2ban_redux_openlog_indent`. This filter will receive a value like *wp(example.com)*.
 
 **`WP_FAIL2BAN_PROXIES`**
-There is no replacement for this constant. You should fix this in Nginx/Apache, or by resetting the `$_SERVER['REMOTE_ADDR']` in your `wp-config.php`. See [https://core.trac.wordpress.org/ticket/9235](https://core.trac.wordpress.org/ticket/9235).
+There is no replacement for this constant. You should fix this in nginx/Apache, or by resetting the `$_SERVER['REMOTE_ADDR']` in your `wp-config.php`. See [https://core.trac.wordpress.org/ticket/9235](https://core.trac.wordpress.org/ticket/9235).
 
 **`WP_FAIL2BAN_BLOCKED_USERS`**
 This constant has been replaced by the `wp_fail2ban_redux_blocked_users` filter. This filter expects an array of usernames, rather than a regular expression pattern. Not only does this make it easier for a wider audience to use, it's also significantly faster than using a regular expression.
