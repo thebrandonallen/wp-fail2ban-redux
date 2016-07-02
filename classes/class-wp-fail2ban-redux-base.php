@@ -100,12 +100,13 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @since 0.1.0
 		 *
-		 * @param int    $priority The message priority level.
 		 * @param string $message  The log message with 'from {IP Address}' appended.
+		 * @param int    $priority The message priority level.
+		 * @param string $ip       The IP address.
 		 *
 		 * @return null|bool True on success. Null if no message passed. Else, false.
 		 */
-		protected function syslog( $priority = LOG_NOTICE, $message = '' ) {
+		protected function syslog( $message = '', $priority = LOG_NOTICE, $ip = '' ) {
 
 			// Don't log a message is none was passed.
 			if  ( ! empty( $message ) ) {
@@ -123,7 +124,12 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 				 */
 				$priority = apply_filters( 'wp_fail2ban_redux_syslog_priority', $priority, $message );
 
-				return syslog( $priority, $message . ' from ' . $this->get_remote_ip() );
+				// Get the remote IP address if none was passed.
+				if ( empty( $ip ) ) {
+					$ip = $this->get_remote_ip();
+				}
+
+				return syslog( $priority, "$messsage from {$ip}" );
 			}
 
 			return null;
