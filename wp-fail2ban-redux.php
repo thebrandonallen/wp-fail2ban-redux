@@ -73,8 +73,10 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 			add_filter( 'xmlrpc_pingback_error', array( $this, 'xmlrpc_pingback_error' ), 1 );
 
 			// Actions.
+			add_action( 'comment_post', array( $this, 'comment_spam' ) );
 			add_action( 'wp_login', array( $this, 'wp_login' ) );
 			add_action( 'wp_login_failed', array( $this, 'wp_login_failed' ) );
+			add_action( 'wp_set_comment_status', array( $this, 'comment_spam' ) );
 			add_action( 'xmlrpc_call', array( $this, 'xmlrpc_call' ), 1 );
 		}
 
@@ -228,6 +230,47 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		}
 
 		/* Actions ************************************************************/
+
+		/**
+		 * Log spammed comments.
+		 *
+		 * @since 0.1.0
+		 *
+		 * @param int    $id     The comment id.
+		 * @param string $status The comment status.
+		 *
+		 * @return void
+		 */
+		public function comment_spam( $id, $status ) {
+
+			/**
+			 * Filters the log spam comments boolean.
+			 *
+			 * @since 0.1.0
+			 *
+			 * @param bool $comments Defaults to false.
+			 */
+			$comments = (bool) apply_filters( 'wp_fail2ban_redux_log_spam_comments', false );
+
+			// Bail if we're not logging spam comments.
+			if ( ! $comments ) {
+				return;
+			}
+
+			// Bail if the comment isn't spam.
+			if ( empty( 'spam' !== $status ) ) {
+				return;
+			}
+
+			// Get the comment.
+			$comment = get_comment( $id );
+			if ( ! $comment ) {
+				return;
+			}
+
+			$this->openlog( 'comment_spam' );
+			$this->syslog( "Spammed comment", LOG_NOTICE, $comment->comment_author_IP );
+		}
 
 		/**
 		 * Log successful authentication attempts.

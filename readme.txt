@@ -29,6 +29,7 @@ The following events are recorded:
 * Pingback requests (*optional*).
 * Blocked user enumeration attempts (*optional*).
 * Authentication attempts for blocked user names (*optional*).
+* Spammed comments (*optional*).
 
 == Installation ==
 
