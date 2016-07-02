@@ -230,6 +230,42 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		/* Actions ************************************************************/
 
 		/**
+		 * Log successful authentication attempts.
+		 *
+		 * @since 0.1.0
+		 *
+		 * @param string $username The username.
+		 */
+		public function wp_login( $username ) {
+			$this->openlog( 'wp_login' );
+			$this->syslog( LOG_INFO, "Accepted password for {$username}" );
+		}
+
+		/**
+		 * Log failed authentication attempts.
+		 *
+		 * @since 0.1.0
+		 */
+		public function wp_login_failed( $username ) {
+
+			// Use the cache to check that the user actually exists.
+			$existing = '';
+			if ( wp_cache_get( $username, 'userlogins' ) ) {
+				$existing = $username;
+			} elseif ( wp_cache_get( $username, 'useremail' ) ) {
+				$existing = wp_cache_get( wp_cache_get( $username, 'useremail' ), 'users' )->user_login;
+			}
+
+			// Set our message variable based on the user's existence.
+			$message = empty( $existing )
+					 ? "Authentication attempt for unknown user {$username}"
+					 : "Authentication failure for {$existing}";
+
+			$this->openlog( 'wp_login_failed' );
+			$this->syslog( LOG_NOTICE, $message );
+		}
+
+		/**
 		 * Maybe log pingback requests.
 		 *
 		 * @since 0.1.0
@@ -274,42 +310,6 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 				$this->openlog( 'xmlrpc_call_pingback', LOG_USER );
 				$this->syslog( LOG_INFO, "Pingback requested for '{$to}'" );
 			}
-		}
-
-		/**
-		 * Log successful authentication attempts.
-		 *
-		 * @since 0.1.0
-		 *
-		 * @param string $username The username.
-		 */
-		public function wp_login( $username ) {
-			$this->openlog( 'wp_login' );
-			$this->syslog( LOG_INFO, "Accepted password for {$username}" );
-		}
-
-		/**
-		 * Log failed authentication attempts.
-		 *
-		 * @since 0.1.0
-		 */
-		public function wp_login_failed( $username ) {
-
-			// Use the cache to check that the user actually exists.
-			$existing = '';
-			if ( wp_cache_get( $username, 'userlogins' ) ) {
-				$existing = $username;
-			} elseif ( wp_cache_get( $username, 'useremail' ) ) {
-				$existing = wp_cache_get( wp_cache_get( $username, 'useremail' ), 'users' )->user_login;
-			}
-
-			// Set our message variable based on the user's existence.
-			$message = empty( $existing )
-					 ? "Authentication attempt for unknown user {$username}"
-					 : "Authentication failure for {$existing}";
-
-			$this->openlog( 'wp_login_failed' );
-			$this->syslog( LOG_NOTICE, $message );
 		}
 	}
 
