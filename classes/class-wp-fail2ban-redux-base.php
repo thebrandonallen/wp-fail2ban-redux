@@ -129,7 +129,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 					$ip = $this->get_remote_ip();
 				}
 
-				return syslog( $priority, "$messsage from {$ip}" );
+				return syslog( $priority, "{$message} from {$ip}" );
 			}
 
 			return null;
