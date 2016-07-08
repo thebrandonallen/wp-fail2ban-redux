@@ -23,14 +23,14 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 	 */
 	abstract class WP_Fail2Ban_Redux_Base {
 
-	/**
-	 * WP Fail2Ban Redux constructor.
-	 *
-	 * @since 0.1.0
-	 */
-	public function __construct() {
-		$this->setup_actions();
-	}
+		/**
+		 * WP Fail2Ban Redux constructor.
+		 *
+		 * @since 0.1.0
+		 */
+		public function __construct() {
+			$this->setup_actions();
+		}
 
 		/**
 		 * Adds our actions and filters.
