@@ -1,5 +1,5 @@
 # WP Fail2Ban Redux #
-**Contributors:** thebrandonallen  
+**Contributors:** [thebrandonallen](https://profiles.wordpress.org/thebrandonallen)  
 **Donate link:** https://brandonallen.me/donate/  
 **Tags:** fail2ban, login, security, syslog  
 **Requires at least:** 4.1.12  
