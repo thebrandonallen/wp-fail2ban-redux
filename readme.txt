@@ -33,26 +33,11 @@ The following events are recorded:
 
 == Installation ==
 
-1. Upload the plugin to your plugins directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Copy `wordpress-hard.conf` and `wordpress-soft.conf` to your Fail2Ban filters directory (generally `/etc/fail2ban/filters.d`).
-1. Edit your `jail.local` to include something like:
-
-		[wordpress-hard]
-		enabled = true
-		filter = wordpress-hard
-		logpath = /var/log/auth.log
-		maxretry = 2
-		port = http,https
-
-		[wordpress-soft]
-		enabled = true
-		filter = wordpress-soft
-		logpath = /var/log/auth.log
-		maxretry = 5
-		port = http,https
-
-1. Reload or restart Fail2Ban
+1. Upload the plugin to your plugins directory.
+1. Activate the plugin through the 'Plugins' menu in WordPress.
+1. Copy the `config/filters/wordpress-hard.conf` and `config/filters/wordpress-soft.conf` files to your Fail2Ban filters directory (generally `/etc/fail2ban/filters.d`).
+1. Copy the `config/jail/wordpress.conf` file to your Fail2Ban jail directory (generally `/etc/fail2ban/jail.d`), or append it's contents to your `jail.local` file.
+1. Reload or restart Fail2Ban.
 
 == Frequently Asked Questions ==
 
