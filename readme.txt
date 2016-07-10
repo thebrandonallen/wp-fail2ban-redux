@@ -60,7 +60,9 @@ The following events are recorded:
 If you haven't set any of the WP fail2ban constants, you don't need to do anything. If you have set some of the constants, [view the upgrade instructions](https://github.com/thebrandonallen/wp-fail2ban-redux/wiki/Upgrading-from-WP-fail2ban).
 
 = Will the `wordpress-hard.conf` and `wordpress-soft.conf` filters still work? =
-Yes, all of the improvements made in *WP Fail2Ban Redux* were done in a way that would allow these filters to continue to work without changes. There are some recommended changes which you can view [here](https://sweet.link/to/github/diff).
+Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that would allow existing functionality to work without changes to your filters. However, the demo filters included with the plugin do contain some recommended changes. There are also new features not found in WP fail2ban that will require changes to your filters to be effective. These changes are linked, by filter, below:
+[wordpress-hard.conf](https://github.com/thebrandonallen/wp-fail2ban-redux/compare/e3ec3c9...master#diff-03e39c06976d40fc41208c0ff448babd)
+[wordpress-soft.conf](https://github.com/thebrandonallen/wp-fail2ban-redux/compare/e3ec3c9...master#diff-4f0afadcecac37d4c1b48730e5ca848c)
 
 == Changelog ==
 
