@@ -20,16 +20,19 @@ While WP fail2ban is a great plugin, there are a number of improvements that cou
 
 The core functionality between *WP Fail2Ban Redux* and WP fail2ban remains the same. *WP Fail2Ban Redux* is considered to be *mostly* a drop-in replacement, because all constants have been replaced with filters. The biggest benefit to filters over constants is that they allow features to be more contextual.
 
-The following events are recorded:
+**The following events are recorded by default:**
 
 * Failed XML-RPC authentication attempts.
 * Successful authentication attempts.
 * Failed authentication attempts -- differentiated by a user's existence.
 * Pingback errors.
-* Pingback requests (*optional*).
-* Blocked user enumeration attempts (*optional*).
-* Authentication attempts for blocked user names (*optional*).
-* Spammed comments (*optional*).
+
+**The following events can be enabled via filter:**
+
+* Pingback requests.
+* Blocked user enumeration attempts.
+* Authentication attempts for blocked usernames.
+* Spammed comments.
 
 ## Installation ##
 
