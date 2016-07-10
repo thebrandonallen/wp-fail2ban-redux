@@ -57,27 +57,7 @@ The following events are recorded:
 == Frequently Asked Questions ==
 
 = How do I upgrade from WP fail2ban? =
-If you haven't set any of the WP fail2ban constants, you don't need to do anything. If you have set some of the constants, upgrade instructions are below.
-
-**`WP_FAIL2BAN_AUTH_LOG`**
-This constant has been replaced by the `wp_fail2ban_redux_openlog_facility` filter. This filter is passed a second parameter with the action being taken.
-
-**`WP_FAIL2BAN_SYSLOG_SHORT_TAG` and `WP_FAIL2BAN_HTTP_HOST`**
-These two constants are used by WP fail2ban to create a tag for the system log (something like *wordpress(example.com)*). The short tag is now enforced, and two constants are merged into one filter, `wp_fail2ban_redux_openlog_indent`. This filter will receive a value like *wp(example.com)*.
-
-**`WP_FAIL2BAN_PROXIES`**
-There is no replacement for this constant. You should fix this in nginx/Apache, or by resetting the `$_SERVER['REMOTE_ADDR']` in your `wp-config.php`. See [https://core.trac.wordpress.org/ticket/9235](https://core.trac.wordpress.org/ticket/9235).
-
-**`WP_FAIL2BAN_BLOCKED_USERS`**
-This constant has been replaced by the `wp_fail2ban_redux_blocked_users` filter. This filter expects an array of usernames, rather than a regular expression pattern. Not only does this make it easier for a wider audience to use, it's also significantly faster than using a regular expression.
-
-**`WP_FAIL2BAN_BLOCK_USER_ENUMERATION`**
-This constant has been replace by the `wp_fail2ban_redux_block_user_enumeration` filter. Just like the constant it replaces, this filter expects a value of `true` or `false`, and defaults to `false`.
-
-**`WP_FAIL2BAN_LOG_PINGBACKS`**
-This constant has been replaced by the `wp_fail2ban_redux_log_pingbacks` filter. Just like the constant it replaces, this filter expects a value of `true` or `false`, and defaults to `false`.
-
-There are also a number of other filters, with lots of documentation, available to make your wildest dreams come true.
+If you haven't set any of the WP fail2ban constants, you don't need to do anything. If you have set some of the constants, [view the upgrade instructions](https://github.com/thebrandonallen/wp-fail2ban-redux/wiki/Upgrading-from-WP-fail2ban).
 
 = Will the `wordpress-hard.conf` and `wordpress-soft.conf` filters still work? =
 Yes, all of the improvements made in *WP Fail2Ban Redux* were done in a way that would allow these filters to continue to work without changes. There are some recommended changes which you can view [here](https://sweet.link/to/github/diff).
