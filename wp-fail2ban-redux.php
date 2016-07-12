@@ -204,8 +204,6 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 				$this->syslog( 'XML-RPC multicall authentication failure' );
 			}
 
-			error_log( $this->xmlrpc_failure_count );
-
 			return $error;
 		}
 
