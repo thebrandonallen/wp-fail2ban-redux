@@ -57,7 +57,7 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @var int
 		 */
-		public $xmlrpc_failure_count = 0;
+		private $xmlrpc_failure_count = 0;
 
 		/**
 		 * Adds our actions and filters.
