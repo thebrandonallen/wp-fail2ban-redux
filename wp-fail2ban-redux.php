@@ -35,7 +35,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Include the WP_Fail2Ban_Redux_Base class.
-require 'classes/class-wp-fail2ban-redux-base.php';
+require_once 'classes/class-wp-fail2ban-redux-base.php';
 
 if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 
