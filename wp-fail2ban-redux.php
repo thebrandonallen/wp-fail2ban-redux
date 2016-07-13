@@ -8,7 +8,6 @@
  * Text Domain:     wp-fail2ban-redux
  * Domain Path:     /languages
  * Version:         0.1.0
- * License:         GPL2
  *
  * @package WP_Fail2Ban_Redux
  */
