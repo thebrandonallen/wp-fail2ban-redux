@@ -57,7 +57,7 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @var int
 		 */
-		private $xmlrpc_failure_count = 0;
+		private static $xmlrpc_failure_count = 0;
 
 		/**
 		 * Adds our actions and filters.
@@ -67,17 +67,17 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		protected function setup_actions() {
 
 			// Filters.
-			add_filter( 'authenticate', array( $this, 'authenticate' ), 1, 2 );
-			add_filter( 'redirect_canonical', array( $this, 'redirect_canonical' ) );
-			add_filter( 'xmlrpc_login_error', array( $this, 'xmlrpc_login_error' ), 1 );
-			add_filter( 'xmlrpc_pingback_error', array( $this, 'xmlrpc_pingback_error' ), 1 );
+			add_filter( 'authenticate', array( __CLASS__, 'authenticate' ), 1, 2 );
+			add_filter( 'redirect_canonical', array( __CLASS__, 'redirect_canonical' ) );
+			add_filter( 'xmlrpc_login_error', array( __CLASS__, 'xmlrpc_login_error' ), 1 );
+			add_filter( 'xmlrpc_pingback_error', array( __CLASS__, 'xmlrpc_pingback_error' ), 1 );
 
 			// Actions.
-			add_action( 'comment_post', array( $this, 'comment_spam' ) );
-			add_action( 'wp_login', array( $this, 'wp_login' ) );
-			add_action( 'wp_login_failed', array( $this, 'wp_login_failed' ) );
-			add_action( 'wp_set_comment_status', array( $this, 'comment_spam' ) );
-			add_action( 'xmlrpc_call', array( $this, 'xmlrpc_call' ), 1 );
+			add_action( 'comment_post', array( __CLASS__, 'comment_spam' ) );
+			add_action( 'wp_login', array( __CLASS__, 'wp_login' ) );
+			add_action( 'wp_login_failed', array( __CLASS__, 'wp_login_failed' ) );
+			add_action( 'wp_set_comment_status', array( __CLASS__, 'comment_spam' ) );
+			add_action( 'xmlrpc_call', array( __CLASS__, 'xmlrpc_call' ), 1 );
 		}
 
 		/* Filters ************************************************************/
@@ -92,7 +92,7 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @return WP_User|WP_Error|void
 		 */
-		public function authenticate( $user, $username ) {
+		public static function authenticate( $user, $username ) {
 
 			/**
 			 * Filters the array of blocked users.
@@ -129,9 +129,9 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 
 				// If the username is blocked, log, and return a 403.
 				if ( $blocked ) {
-					$this->openlog( 'authenticate' );
-					$this->syslog( "Blocked authentication attempt for {$username}" );
-					$this->exit( 'authenticate' );
+					self::openlog( 'authenticate' );
+					self::syslog( "Blocked authentication attempt for {$username}" );
+					self::exit( 'authenticate' );
 				}
 			}
 
@@ -151,7 +151,7 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @return WP_User|WP_Error|void
 		 */
-		public function redirect_canonical( $redirect_url ) {
+		public static function redirect_canonical( $redirect_url ) {
 
 			/**
 			 * Filters the user enumeration boolean.
@@ -164,9 +164,9 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 
 			// Maybe block and log user enumeration attempts.
 			if ( $enum && isset( $_GET['author'] ) && (int) $_GET['author'] ) {
-				$this->openlog( 'redirect_canonical' );
-				$this->syslog( 'Blocked user enumeration attempt' );
-				$this->exit( 'redirect_canonical' );
+				self::openlog( 'redirect_canonical' );
+				self::syslog( 'Blocked user enumeration attempt' );
+				self::exit( 'redirect_canonical' );
 			}
 
 			return $redirect_url;
@@ -186,22 +186,22 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @return IXR_Error
 		 */
-		public function xmlrpc_login_error( $error ) {
+		public static function xmlrpc_login_error( $error ) {
 
 			// Log XML-RPC authentication failures.
-			$this->openlog( 'xmlrpc_login_error' );
-			$this->syslog( 'XML-RPC authentication failure' );
+			self::openlog( 'xmlrpc_login_error' );
+			self::syslog( 'XML-RPC authentication failure' );
 
 			// Bump the XML-RPC failure count.
-			$this->xmlrpc_failure_count++;
+			self::$xmlrpc_failure_count++;
 
 			/*
 			 * If the failure count is greater than 1, log the failure. Since
 			 * the count is reset for each request, it can be reasonably assumed
 			 * that it's the result of a multicall.
 			 */
-			if ( 1 < $this->xmlrpc_failure_count ) {
-				$this->syslog( 'XML-RPC multicall authentication failure' );
+			if ( 1 < self::$xmlrpc_failure_count ) {
+				self::syslog( 'XML-RPC multicall authentication failure' );
 			}
 
 			return $error;
@@ -216,12 +216,12 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @return IXR_Error
 		 */
-		public function xmlrpc_pingback_error( $error ) {
+		public static function xmlrpc_pingback_error( $error ) {
 
 			// Don't log a pingback error if a pingback was already registered.
 			if ( 48 !== $error->code ) {
-				$this->openlog( 'xmlrpc_pingback_error' );
-				$this->syslog( "Pingback error {$error->code} generated" );
+				self::openlog( 'xmlrpc_pingback_error' );
+				self::syslog( "Pingback error {$error->code} generated" );
 			}
 
 			return $error;
@@ -239,7 +239,7 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @return void
 		 */
-		public function comment_spam( $id, $status ) {
+		public static function comment_spam( $id, $status ) {
 
 			/**
 			 * Filters the log spam comments boolean.
@@ -266,8 +266,8 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 				return;
 			}
 
-			$this->openlog( 'comment_spam' );
-			$this->syslog( "Spammed comment", LOG_NOTICE, $comment->comment_author_IP );
+			self::openlog( 'comment_spam' );
+			self::syslog( "Spammed comment", LOG_NOTICE, $comment->comment_author_IP );
 		}
 
 		/**
@@ -277,9 +277,9 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @param string $username The username.
 		 */
-		public function wp_login( $username ) {
-			$this->openlog( 'wp_login' );
-			$this->syslog( "Accepted password for {$username}", LOG_INFO );
+		public static function wp_login( $username ) {
+			self::openlog( 'wp_login' );
+			self::syslog( "Accepted password for {$username}", LOG_INFO );
 		}
 
 		/**
@@ -287,7 +287,7 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @since 0.1.0
 		 */
-		public function wp_login_failed( $username ) {
+		public static function wp_login_failed( $username ) {
 
 			// Use the cache to check that the user actually exists.
 			$existing = '';
@@ -302,8 +302,8 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 					 ? "Authentication attempt for unknown user {$username}"
 					 : "Authentication failure for {$existing}";
 
-			$this->openlog( 'wp_login_failed' );
-			$this->syslog( $message );
+			self::openlog( 'wp_login_failed' );
+			self::syslog( $message );
 		}
 
 		/**
@@ -317,7 +317,7 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @return void
 		 */
-		public function xmlrpc_call( $name ) {
+		public static function xmlrpc_call( $name ) {
 
 			// Bail if we're not processing a pingback.
 			if ( 'pingback.ping' !== $name ) {
@@ -348,8 +348,8 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 					$to = esc_url_raw( $args[1] );
 				}
 
-				$this->openlog( 'xmlrpc_call_pingback', LOG_USER );
-				$this->syslog( "Pingback requested for '{$to}'", LOG_INFO );
+				self::openlog( 'xmlrpc_call_pingback', LOG_USER );
+				self::syslog( "Pingback requested for '{$to}'", LOG_INFO );
 			}
 		}
 	}

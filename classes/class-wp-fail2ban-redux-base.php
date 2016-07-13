@@ -50,7 +50,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @return bool True on success.
 		 */
-		protected function openlog( $action = '', $facility = LOG_AUTH ) {
+		protected static function openlog( $action = '', $facility = LOG_AUTH ) {
 
 			/**
 			 * Filters the $indent parameter, which will be the `[DAEMON]`
@@ -106,7 +106,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @return null|bool True on success. Null if no message passed. Else, false.
 		 */
-		protected function syslog( $message = '', $priority = LOG_NOTICE, $ip = '' ) {
+		protected static function syslog( $message = '', $priority = LOG_NOTICE, $ip = '' ) {
 
 			// Don't log a message is none was passed.
 			if  ( ! empty( $message ) ) {
@@ -126,7 +126,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 
 				// Get the remote IP address if none was passed.
 				if ( empty( $ip ) ) {
-					$ip = $this->get_remote_ip();
+					$ip = self::get_remote_ip();
 				}
 
 				return syslog( $priority, "{$message} from {$ip}" );
@@ -142,7 +142,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		*
 		* @param string $action The logging action.
 		*/
-		protected function exit( $action = '' ) {
+		protected static function exit( $action = '' ) {
 
 			/**
 			 * Fires before the script is exited and a 403 status is returned.
@@ -182,7 +182,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @return string The remote IP address.
 		 */
-		protected function get_remote_ip() {
+		protected static function get_remote_ip() {
 			return preg_replace( '/[^0-9a-fA-F:., ]/', '', $_SERVER['REMOTE_ADDR'] );
 		}
 	}
