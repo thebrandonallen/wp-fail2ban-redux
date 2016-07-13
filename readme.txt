@@ -18,7 +18,7 @@ This plugin is (*mostly*) a drop-in replacement for [WP fail2ban](https://wordpr
 
 While WP fail2ban is a great plugin, there are a number of improvements that could be made. In order to facilitate these improvements, a major refactoring of the codebase was necessary.
 
-The core functionality between *WP Fail2Ban Redux* and WP fail2ban remains the same. *WP Fail2Ban Redux* is considered to be *mostly* a drop-in replacement, because all constants have been replaced with filters. The biggest benefit to filters over constants is that they allow features to be more contextual.
+The core functionality between *WP Fail2Ban Redux* and WP fail2ban remains the same. *WP Fail2Ban Redux* is considered to be *mostly* a drop-in replacement, because all constants have been replaced with filters, and will, possibly, require some upgrade work. Don’t work it’s as simple as implementing the constants.
 
 **The following events are recorded by default:**
 
