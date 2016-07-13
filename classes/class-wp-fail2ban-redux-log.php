@@ -1,27 +1,24 @@
 <?php
 /**
- * The WP Fail2Ban Redux Base Class.
- *
- * Extend this class
+ * The WP Fail2Ban Redux Log class.
  *
  * @since 0.1.0
  *
  * @package WP_Fail2Ban_Redux
- * @subpackage WP_Fail2Ban_Redux_Base
+ * @subpackage WP_Fail2Ban_Redux_Log
  */
 
 // Bail if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
+if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 
 	/**
-	 * The WP Fail2Ban Redux Base Class.
+	 * The WP Fail2Ban Redux Log Class.
 	 *
 	 * @since 0.1.0
-	 * @abstract
 	 */
-	abstract class WP_Fail2Ban_Redux_Base {
+	class WP_Fail2Ban_Redux_Log {
 
 		/**
 		 * The remote IP address.
@@ -33,23 +30,6 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		private static $ip;
 
 		/**
-		 * WP Fail2Ban Redux constructor.
-		 *
-		 * @since 0.1.0
-		 */
-		public function __construct() {
-			$this->setup_actions();
-		}
-
-		/**
-		 * Adds our actions and filters.
-		 *
-		 * @since 0.1.0
-		 * @abstract
-		 */
-		abstract protected function setup_actions();
-
-		/**
 		 * Calls PHP's `openlog()` function with our custom options.
 		 *
 		 * @since 0.1.0
@@ -59,7 +39,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @return bool True on success.
 		 */
-		protected static function openlog( $action = '', $facility = LOG_AUTH ) {
+		public static function openlog( $action = '', $facility = LOG_AUTH ) {
 
 			/**
 			 * Filters the $indent parameter, which will be the `[DAEMON]`
@@ -115,7 +95,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @return null|bool True on success. Null if no message passed. Else, false.
 		 */
-		protected static function syslog( $message = '', $priority = LOG_NOTICE, $ip = '' ) {
+		public static function syslog( $message = '', $priority = LOG_NOTICE, $ip = '' ) {
 
 			// Don't log a message is none was passed.
 			if  ( ! empty( $message ) ) {
@@ -151,7 +131,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		*
 		* @param string $action The logging action.
 		*/
-		protected static function exit( $action = '' ) {
+		public static function exit( $action = '' ) {
 
 			/**
 			 * Fires before the script is exited and a 403 status is returned.
@@ -191,7 +171,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 *
 		 * @return string The remote IP address.
 		 */
-		protected static function get_remote_ip() {
+		private static function get_remote_ip() {
 			if ( empty( self::$ip ) ) {
 				self::$ip = preg_replace( '/[^0-9a-fA-F:., ]/', '', $_SERVER['REMOTE_ADDR'] );
 			}
