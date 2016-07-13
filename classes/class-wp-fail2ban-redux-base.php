@@ -24,6 +24,15 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 	abstract class WP_Fail2Ban_Redux_Base {
 
 		/**
+		 * The remote IP address.
+		 *
+		 * @since 0.1.0
+		 *
+		 * @var string
+		 */
+		private static $ip;
+
+		/**
 		 * WP Fail2Ban Redux constructor.
 		 *
 		 * @since 0.1.0
@@ -183,7 +192,11 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Base' ) ) {
 		 * @return string The remote IP address.
 		 */
 		protected static function get_remote_ip() {
-			return preg_replace( '/[^0-9a-fA-F:., ]/', '', $_SERVER['REMOTE_ADDR'] );
+			if ( empty( self::$ip ) ) {
+				self::$ip = preg_replace( '/[^0-9a-fA-F:., ]/', '', $_SERVER['REMOTE_ADDR'] );
+			}
+
+			return self::$ip;
 		}
 	}
 }
