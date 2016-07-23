@@ -4,7 +4,7 @@ Donate link: https://brandonallen.me/donate/
 Tags: fail2ban, login, security, syslog
 Requires at least: 4.1.12
 Tested up to: 4.6
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +53,9 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 [wordpress-soft.conf](https://github.com/thebrandonallen/wp-fail2ban-redux/compare/e3ec3c9...master#diff-4f0afadcecac37d4c1b48730e5ca848c)
 
 == Changelog ==
+
+= 0.1.1 =
+* In PHP < 7.0, `exit` isn't allowed as a method name. `WP_Fail2Ban_Redux_Log::exit` is now `WP_Fail2Ban_Redux_Log::_exit`.
 
 = 0.1.0 =
 * Initial release.
