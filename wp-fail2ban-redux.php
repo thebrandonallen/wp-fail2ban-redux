@@ -37,15 +37,5 @@ defined( 'ABSPATH' ) || exit;
 require_once 'classes/class-wp-fail2ban-redux-log.php';
 require_once 'classes/class-wp-fail2ban-redux.php';
 
-// Filters.
-add_filter( 'authenticate', array( 'WP_Fail2Ban_Redux', 'authenticate' ), 1, 2 );
-add_filter( 'redirect_canonical', array( 'WP_Fail2Ban_Redux', 'redirect_canonical' ) );
-add_filter( 'xmlrpc_login_error', array( 'WP_Fail2Ban_Redux', 'xmlrpc_login_error' ), 1 );
-add_filter( 'xmlrpc_pingback_error', array( 'WP_Fail2Ban_Redux', 'xmlrpc_pingback_error' ), 1 );
-
-// Actions.
-add_action( 'comment_post', array( 'WP_Fail2Ban_Redux', 'comment_spam' ) );
-add_action( 'wp_login', array( 'WP_Fail2Ban_Redux', 'wp_login' ) );
-add_action( 'wp_login_failed', array( 'WP_Fail2Ban_Redux', 'wp_login_failed' ) );
-add_action( 'wp_set_comment_status', array( 'WP_Fail2Ban_Redux', 'comment_spam' ) );
-add_action( 'xmlrpc_call', array( 'WP_Fail2Ban_Redux', 'xmlrpc_call' ), 1 );
+// Initialize the plugin.
+WP_Fail2Ban_Redux::get_instance();
