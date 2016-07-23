@@ -34,15 +34,6 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		private static $instance;
 
 		/**
-		 * The count of XML-RPC authentication failures.
-		 *
-		 * @since 0.1.0
-		 *
-		 * @var int
-		 */
-		private static $xmlrpc_failure_count = 0;
-
-		/**
 		 * Provides access to a single instance of `WP_Fail2Ban_Redux` using the
 		 * singleton pattern.
 		 *
@@ -195,20 +186,21 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 * @return IXR_Error
 		 */
 		public function xmlrpc_login_error( $error ) {
+			static $failure_count = 0;
 
 			// Log XML-RPC authentication failures.
 			WP_Fail2Ban_Redux_Log::openlog( 'xmlrpc_login_error' );
 			WP_Fail2Ban_Redux_Log::syslog( 'XML-RPC authentication failure' );
 
 			// Bump the XML-RPC failure count.
-			self::$xmlrpc_failure_count++;
+			$failure_count++;
 
 			/*
 			 * If the failure count is greater than 1, log the failure. Since
 			 * the count is reset for each request, it can be reasonably assumed
 			 * that it's the result of a multicall.
 			 */
-			if ( 1 < self::$xmlrpc_failure_count ) {
+			if ( 1 < $failure_count ) {
 				WP_Fail2Ban_Redux_Log::syslog( 'XML-RPC multicall authentication failure' );
 			}
 
