@@ -25,6 +25,15 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 	class WP_Fail2Ban_Redux {
 
 		/**
+		 * The WP Fail2Ban Redux instance.
+		 *
+		 * @since 0.1.1
+		 *
+		 * @var WP_Fail2Ban_Redux
+		 */
+		private static $instance;
+
+		/**
 		 * The count of XML-RPC authentication failures.
 		 *
 		 * @since 0.1.0
@@ -32,6 +41,22 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 		 * @var int
 		 */
 		private static $xmlrpc_failure_count = 0;
+
+		/**
+		 * Provides access to a single instance of `WP_Fail2Ban_Redux` using the
+		 * singleton pattern.
+		 *
+		 * @since 0.1.1
+		 *
+		 * @return WP_Fail2Ban_Redux
+		 */
+		public static function get_instance() {
+			if ( null === self::$instance ) {
+				self::$instance = new self;
+			}
+
+			return self::$instance;
+		}
 
 		/* Filters ************************************************************/
 
