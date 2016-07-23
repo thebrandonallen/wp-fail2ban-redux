@@ -84,7 +84,7 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 				if ( $blocked ) {
 					WP_Fail2Ban_Redux_Log::openlog( 'authenticate' );
 					WP_Fail2Ban_Redux_Log::syslog( "Blocked authentication attempt for {$username}" );
-					WP_Fail2Ban_Redux_Log::exit( 'authenticate' );
+					WP_Fail2Ban_Redux_Log::_exit( 'authenticate' );
 				}
 			}
 
@@ -119,7 +119,7 @@ if ( class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 			if ( $enum && isset( $_GET['author'] ) && (int) $_GET['author'] ) {
 				WP_Fail2Ban_Redux_Log::openlog( 'redirect_canonical' );
 				WP_Fail2Ban_Redux_Log::syslog( 'Blocked user enumeration attempt' );
-				WP_Fail2Ban_Redux_Log::exit( 'redirect_canonical' );
+				WP_Fail2Ban_Redux_Log::_exit( 'redirect_canonical' );
 			}
 
 			return $redirect_url;
