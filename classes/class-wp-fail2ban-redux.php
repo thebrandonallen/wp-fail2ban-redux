@@ -11,7 +11,7 @@
 // Bail if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
+if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 
 	/**
 	 * The main WP Fail2Ban Redux Class.
