@@ -72,7 +72,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 			add_filter( 'xmlrpc_pingback_error', array( $this, 'xmlrpc_pingback_error' ), 1 );
 
 			// Actions.
-			add_action( 'comment_post', array( $this, 'comment_spam' ) );
+			add_action( 'comment_post', array( $this, 'comment_spam' ), 10, 2 );
 			add_action( 'wp_login', array( $this, 'wp_login' ) );
 			add_action( 'wp_login_failed', array( $this, 'wp_login_failed' ) );
 			add_action( 'wp_set_comment_status', array( $this, 'comment_spam' ) );
