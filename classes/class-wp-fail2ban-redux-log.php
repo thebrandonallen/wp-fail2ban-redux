@@ -98,7 +98,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 		public static function syslog( $message = '', $priority = LOG_NOTICE, $ip = '' ) {
 
 			// Don't log a message is none was passed.
-			if  ( ! empty( $message ) ) {
+			if ( ! empty( $message ) ) {
 
 				/**
 				 * Filters the $priority parameter, which is used to tell
@@ -146,6 +146,10 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 
 			/**
 			 * Filters the exit message.
+			 *
+			 * NOTE: There is no output escaping applied to the exit message.
+			 *       Please be safe, and escape your output, if you will be
+			 *       doing anything fancy with this filter.
 			 *
 			 * @since 0.1.0
 			 *

@@ -267,7 +267,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 			}
 
 			WP_Fail2Ban_Redux_Log::openlog( 'comment_spam' );
-			WP_Fail2Ban_Redux_Log::syslog( "Spammed comment", LOG_NOTICE, $comment->comment_author_IP );
+			WP_Fail2Ban_Redux_Log::syslog( 'Spammed comment', LOG_NOTICE, $comment->comment_author_IP );
 		}
 
 		/**
