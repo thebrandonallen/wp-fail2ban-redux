@@ -73,6 +73,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 
 			// Actions.
 			add_action( 'comment_post', array( $this, 'comment_spam' ), 10, 2 );
+			add_action( 'parse_request', array( $this, 'user_enumeration' ), 12, 1 );
 			add_action( 'wp_login', array( $this, 'wp_login' ) );
 			add_action( 'wp_login_failed', array( $this, 'wp_login_failed' ) );
 			add_action( 'wp_set_comment_status', array( $this, 'comment_spam' ) );
@@ -268,6 +269,52 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 
 			WP_Fail2Ban_Redux_Log::openlog( 'comment_spam' );
 			WP_Fail2Ban_Redux_Log::syslog( 'Spammed comment', LOG_NOTICE, $comment->comment_author_IP );
+		}
+
+		/**
+		 * Checks for, and logs, user enumeration attempts.
+		 *
+		 * If we're in the admin, pretty permalinks are disabled, or were not
+		 * processing a GET request, we do not attempt to block enumeration. In
+		 * these scenarios, attempting to block user enumeration can cause
+		 * terrible, horrible, no good, very bad things to happen.
+		 *
+		 * @since 0.2.0
+		 *
+		 * @return void
+		 */
+		public function user_enumeration() {
+
+			// Bail if we don't have an `author` or `author_name` request var.
+			if ( ! isset( $_GET['author'] ) && ! isset( $_GET['author_name'] ) ) {
+				return;
+			}
+
+			// Bail if we're in the admin.
+			if ( is_admin() ) {
+				return;
+			}
+
+			// Bail if pretty permalinks are disabled.
+			if ( ! get_option( 'permalink_structure' ) ) {
+				return;
+			}
+
+			/**
+			 * Filters the user enumeration boolean.
+			 *
+			 * @since 0.1.0
+			 *
+			 * @param bool $enum Defaults to false.
+			 */
+			$enum = (bool) apply_filters( 'wp_fail2ban_redux_block_user_enumeration', false );
+
+			// Maybe block and log user enumeration attempts.
+			if ( $enum ) {
+				WP_Fail2Ban_Redux_Log::openlog( 'user_enumeration' );
+				WP_Fail2Ban_Redux_Log::syslog( 'Blocked user enumeration attempt' );
+				WP_Fail2Ban_Redux_Log::_exit( 'user_enumeration' );
+			}
 		}
 
 		/**
