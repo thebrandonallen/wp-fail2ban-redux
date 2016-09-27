@@ -39,7 +39,7 @@ The core functionality between *WP Fail2Ban Redux* and WP fail2ban remains the s
 1. Upload the plugin to your plugins directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
 1. Copy the `config/filters/wordpress-hard.conf` and `config/filters/wordpress-soft.conf` files to your Fail2Ban filters directory (generally `/etc/fail2ban/filters.d`).
-1. Copy the `config/jail/wordpress.conf` file to your Fail2Ban jail directory (generally `/etc/fail2ban/jail.d`), or append it's contents to your `jail.local` file.
+1. Copy the `config/jail/wordpress.conf` file to your Fail2Ban jail directory (generally `/etc/fail2ban/jail.d`), or append it's contents to your `jail.local` file. ***Make sure you read the notes in this file to aid successful setup.***
 1. Reload or restart Fail2Ban.
 
 == Frequently Asked Questions ==
@@ -51,6 +51,8 @@ If you haven't set any of the WP fail2ban constants, you don't need to do anythi
 Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that would allow existing functionality to work without changes to your filters. However, the demo filters included with the plugin do contain some recommended changes. There are also new features not found in WP fail2ban that will require changes to your filters to be effective. These changes are linked, by filter, below:
 [wordpress-hard.conf](https://github.com/thebrandonallen/wp-fail2ban-redux/compare/e3ec3c9...master#diff-03e39c06976d40fc41208c0ff448babd)
 [wordpress-soft.conf](https://github.com/thebrandonallen/wp-fail2ban-redux/compare/e3ec3c9...master#diff-4f0afadcecac37d4c1b48730e5ca848c)
+
+*Be ye forewarned: Future changes to WP fail2ban may break backwards compatibility with WP Fail2Ban Redux filters. No attempts will be made to fix this. So, even though it's not required, it is probably a good idea to update the filters anyway.*
 
 == Changelog ==
 
