@@ -65,17 +65,35 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 */
 		private function setup_actions() {
 
-			// Filters.
+			/* Filters ********************************************************/
+
+			// Username and email blocking.
 			add_filter( 'authenticate', array( $this, 'authenticate' ), 1, 2 );
+
+			// Failed XML-RPC login attempts.
 			add_filter( 'xmlrpc_login_error', array( $this, 'xmlrpc_login_error' ), 1 );
+
+			// XML-RPC Pingback errors.
 			add_filter( 'xmlrpc_pingback_error', array( $this, 'xmlrpc_pingback_error' ), 1 );
 
-			// Actions.
+			/* Actions ********************************************************/
+
+			// Comment spam.
 			add_action( 'comment_post', array( $this, 'comment_spam' ), 10, 2 );
+
+			// User enumeration. Hooked later for a cheap rest request check.
 			add_action( 'parse_request', array( $this, 'user_enumeration' ), 12, 1 );
+
+			// Login logging.
 			add_action( 'wp_login', array( $this, 'wp_login' ) );
+
+			// Failed logins.
 			add_action( 'wp_login_failed', array( $this, 'wp_login_failed' ) );
+
+			// Comment spam.
 			add_action( 'wp_set_comment_status', array( $this, 'comment_spam' ) );
+
+			// XML-RPC logging.
 			add_action( 'xmlrpc_call', array( $this, 'xmlrpc_call' ), 1 );
 		}
 
@@ -159,11 +177,6 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 * Logs XML-RPC authentication failures.
 		 *
 		 * @since 0.1.0
-		 *
-		 * @todo Maybe remove this from wordpress-hard.conf as it's actually
-		 *       handled by the `authenticate`, `wp_login`, and
-		 *       `wp_login_failed` hooks. Probably leave the notice as it helps
-		 *       with auditing.
 		 *
 		 * @param IXR_Error $error The IXR_Error object.
 		 *
@@ -316,6 +329,8 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 * Log failed authentication attempts.
 		 *
 		 * @since 0.1.0
+		 *
+		 * @param string $username Username or email address.
 		 */
 		public function wp_login_failed( $username ) {
 
@@ -341,7 +356,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 *
 		 * @since 0.1.0
 		 *
-		 * @todo Add more information to the log message like website, etc.
+		 * @todo Maybe add more information to the log message like website, etc.
 		 *
 		 * @param string $name The method name.
 		 *
