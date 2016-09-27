@@ -56,6 +56,13 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 
 ## Changelog ##
 
+### 0.2.0 ###
+* Fixed PHP notices where `WP_Fail2Ban_Redux::comment_spam` expects two parameters. Decided it was probably a good idea to oblige.
+* User enumeration blocking now checks for both the `author` and `author_name` parameters. The `author_name` parameter could be used to validate the existence of a particular username, so blocking on this parameter as well will further reduce the attack surface.
+* Fixes an issue where user enumeration blocking was overzealous and would prevent actions in the admin area. Props [pjv](https://github.com/pjv). [#2](https://github.com/thebrandonallen/wp-fail2ban-redux/issues/2)
+* `WP_Fail2Ban_Redux::redirect_canonical` is now deprecated. If you were doing anything with this function, or the hook that initialized it, you should look at `WP_Fail2Ban_Redux::user_enumeration` instead.
+* Added a note to `wordpress.conf` about the `logpath` parameter, and common auth log locations. *There is no need to changed existing configurations.* This is merely to aid setup for future users.
+
 ### 0.1.1 ###
 * In PHP < 7.0, `exit` isn't allowed as a method name. `WP_Fail2Ban_Redux_Log::exit` is now `WP_Fail2Ban_Redux_Log::_exit`.
 
