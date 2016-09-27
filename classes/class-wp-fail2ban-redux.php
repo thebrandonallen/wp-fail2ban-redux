@@ -67,7 +67,6 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 
 			// Filters.
 			add_filter( 'authenticate', array( $this, 'authenticate' ), 1, 2 );
-			add_filter( 'redirect_canonical', array( $this, 'redirect_canonical' ) );
 			add_filter( 'xmlrpc_login_error', array( $this, 'xmlrpc_login_error' ), 1 );
 			add_filter( 'xmlrpc_pingback_error', array( $this, 'xmlrpc_pingback_error' ), 1 );
 
@@ -145,30 +144,14 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 * otherwise bad things will happen.
 		 *
 		 * @since 0.1.0
+		 * @deprecated 0.2.0
 		 *
-		 * @param WP_User|WP_Error $user     The WP_User or WP_Error object.
-		 * @param string           $username The username or email address.
+		 * @param string $redirect_url  The redirect URL.
 		 *
-		 * @return WP_User|WP_Error|void
+		 * @return $redirect_url
 		 */
 		public function redirect_canonical( $redirect_url ) {
-
-			/**
-			 * Filters the user enumeration boolean.
-			 *
-			 * @since 0.1.0
-			 *
-			 * @param bool $enum Defaults to false.
-			 */
-			$enum = (bool) apply_filters( 'wp_fail2ban_redux_block_user_enumeration', false );
-
-			// Maybe block and log user enumeration attempts.
-			if ( $enum && isset( $_GET['author'] ) && (int) $_GET['author'] ) {
-				WP_Fail2Ban_Redux_Log::openlog( 'redirect_canonical' );
-				WP_Fail2Ban_Redux_Log::syslog( 'Blocked user enumeration attempt' );
-				WP_Fail2Ban_Redux_Log::_exit( 'redirect_canonical' );
-			}
-
+			_deprecated_function( 'WP_Fail2Ban_Redux::redirect_canonical', '0.2.0', 'WP_Fail2Ban_Redux::user_enumeration' );
 			return $redirect_url;
 		}
 
