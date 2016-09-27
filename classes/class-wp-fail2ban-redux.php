@@ -91,7 +91,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 			add_action( 'wp_login_failed', array( $this, 'wp_login_failed' ) );
 
 			// Comment spam.
-			add_action( 'wp_set_comment_status', array( $this, 'comment_spam' ) );
+			add_action( 'wp_set_comment_status', array( $this, 'comment_spam' ), 10, 2 );
 
 			// XML-RPC logging.
 			add_action( 'xmlrpc_call', array( $this, 'xmlrpc_call' ), 1 );
