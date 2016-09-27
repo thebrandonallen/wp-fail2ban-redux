@@ -82,7 +82,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 			add_action( 'comment_post', array( $this, 'comment_spam' ), 10, 2 );
 
 			// User enumeration. Hooked later for a cheap rest request check.
-			add_action( 'parse_request', array( $this, 'user_enumeration' ), 12, 1 );
+			add_action( 'parse_request', array( $this, 'user_enumeration' ), 12 );
 
 			// Login logging.
 			add_action( 'wp_login', array( $this, 'wp_login' ) );
