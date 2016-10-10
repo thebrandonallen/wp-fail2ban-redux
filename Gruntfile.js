@@ -1,29 +1,79 @@
 module.exports = function( grunt ) {
 
 	'use strict';
-	var banner = '/**\n * <%= pkg.homepage %>\n * Copyright (c) <%= grunt.template.today("yyyy") %>\n * This file is generated automatically. Do not edit.\n */\n';
+	var SOURCE_DIR = '',
+		BUILD_DIR = 'build/',
+
+		WPF2BR_EXCLUDED_MISC = [
+			'!**/.idea/**',
+			'!**/assets/**',
+			'!**/bin/**',
+			'!**/build/**',
+			'!**/coverage/**',
+			'!**/nbproject/**',
+			'!**/node_modules/**',
+			'!**/tests/**',
+			'!Gruntfile.js*',
+			'!package.json*',
+			'!phpunit.xml*',
+			'!.{editorconfig,distignore,gitignore,jshintrc,travis.yml,DS_Store}'
+		];
+
 	// Project configuration
 	grunt.initConfig( {
 
 		pkg: grunt.file.readJSON( 'package.json' ),
 
-		addtextdomain: {
+		checktextdomain: {
 			options: {
-				textdomain: 'wp-fail2ban-redux',
+				text_domain: 'wp-fail2ban-redux',
+				correct_domain: false,
+				keywords: [
+					'__:1,2d',
+					'_e:1,2d',
+					'_x:1,2c,3d',
+					'_n:1,2,4d',
+					'_ex:1,2c,3d',
+					'_nx:1,2,4c,5d',
+					'esc_attr__:1,2d',
+					'esc_attr_e:1,2d',
+					'esc_attr_x:1,2c,3d',
+					'esc_html__:1,2d',
+					'esc_html_e:1,2d',
+					'esc_html_x:1,2c,3d',
+					'_n_noop:1,2,3d',
+					'_nx_noop:1,2,3c,4d'
+				]
 			},
-			target: {
-				files: {
-					src: [ '*.php', '**/*.php', '!node_modules/**', '!php-tests/**', '!bin/**' ]
-				}
+			files: {
+				src: [ '**/*.php' ].concat( WPF2BR_EXCLUDED_MISC ),
+				expand: true
 			}
 		},
 
-		wp_readme_to_markdown: {
-			your_target: {
-				files: {
-					'README.md': 'readme.txt'
-				}
-			},
+		clean: {
+			all: [ BUILD_DIR ]
+		},
+
+		copy: {
+			files: {
+				files: [
+					{
+						cwd: '',
+						dest: 'build/',
+						dot: true,
+						expand: true,
+						src: ['**', '!**/.{svn,git}/**'].concat( WPF2BR_EXCLUDED_MISC )
+					}
+				]
+			}
+		},
+
+		jshint: {
+			options: grunt.file.readJSON( '.jshintrc' ),
+			grunt: {
+				src: ['Gruntfile.js']
+			}
 		},
 
 		makepot: {
@@ -40,9 +90,9 @@ module.exports = function( grunt ) {
 					updateTimestamp: true,
 					processPot: function( pot, options ) {
 						pot.headers['report-msgid-bugs-to'] = 'https://github.com/thebrandonallen/wp-fail2ban-redux/issues';
-						pot.headers['last-translator'] = 'BRANDON ALLEN <plugins@brandonallen.me>';
-						pot.headers['language-team'] = 'ENGLISH <plugins@brandonallen.me>';
-						pot.headers['language'] = 'en_US';
+						pot.headers['last-translator']      = 'BRANDON ALLEN <plugins@brandonallen.me>';
+						pot.headers['language-team']        = 'ENGLISH <plugins@brandonallen.me>';
+						pot.headers['language']             = 'en_US';
 						var translation, // Exclude meta data from pot.
 							excluded_meta = [
 								'Plugin Name of the plugin/theme',
@@ -65,13 +115,59 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
+
+		'string-replace': {
+			dev: {
+				files: {
+					'wp-fail2ban-redux.php': 'wp-fail2ban-redux.php'
+				},
+				options: {
+					replacements: [{
+						pattern: /(\* Version:\s*)(.*)$/gm, // For plugin header
+						replacement: '$1<%= pkg.version %>'
+					}]
+				}
+			},
+			build: {
+				files: {
+					'wp-fail2ban-redux.php': 'wp-fail2ban-redux.php',
+					'readme.txt': 'readme.txt'
+				},
+				options: {
+					replacements: [{
+						pattern: /(\* Version:\s*)(.*)$/gm, // For plugin header
+						replacement: '$1<%= pkg.version %>'
+					},
+					{
+						pattern: /(Stable tag:[\*\ ]*)(.*\S)/gim, // For readme.*
+						replacement: '$1<%= pkg.version %>'
+					}]
+				}
+			}
+		},
+
+		wp_readme_to_markdown: {
+			your_target: {
+				files: {
+					'README.md': 'readme.txt'
+				}
+			}
+		}
 	} );
 
+	// Load our tasks.
+	grunt.loadNpmTasks( 'grunt-checktextdomain' );
+	grunt.loadNpmTasks( 'grunt-contrib-clean' );
+	grunt.loadNpmTasks( 'grunt-contrib-copy' );
+	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
+	grunt.loadNpmTasks( 'grunt-string-replace' );
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
 	grunt.loadNpmTasks( 'grunt-wp-readme-to-markdown' );
-	grunt.registerTask( 'i18n', ['addtextdomain', 'makepot'] );
+
+	// Register custom tasks.
+	grunt.registerTask( 'i18n',   ['checktextdomain', 'makepot'] );
 	grunt.registerTask( 'readme', ['wp_readme_to_markdown'] );
+	grunt.registerTask( 'build',  [ 'clean:all', 'string-replace:build', 'readme', 'i18n', 'copy:files' ] );
 
 	grunt.util.linefeed = '\n';
-
 };
