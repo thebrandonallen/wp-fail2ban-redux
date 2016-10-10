@@ -19,6 +19,9 @@ module.exports = function( grunt ) {
 			'!.{editorconfig,distignore,gitignore,jshintrc,travis.yml,DS_Store}'
 		];
 
+	// Load tasks.
+	require( 'matchdep' ).filterDev([ 'grunt-*', '!grunt-legacy-util' ]).forEach( grunt.loadNpmTasks );
+
 	// Project configuration
 	grunt.initConfig( {
 
@@ -154,15 +157,6 @@ module.exports = function( grunt ) {
 			}
 		}
 	} );
-
-	// Load our tasks.
-	grunt.loadNpmTasks( 'grunt-checktextdomain' );
-	grunt.loadNpmTasks( 'grunt-contrib-clean' );
-	grunt.loadNpmTasks( 'grunt-contrib-copy' );
-	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
-	grunt.loadNpmTasks( 'grunt-string-replace' );
-	grunt.loadNpmTasks( 'grunt-wp-i18n' );
-	grunt.loadNpmTasks( 'grunt-wp-readme-to-markdown' );
 
 	// Register custom tasks.
 	grunt.registerTask( 'i18n',   ['checktextdomain', 'makepot'] );
