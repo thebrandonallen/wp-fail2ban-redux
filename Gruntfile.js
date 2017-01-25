@@ -5,18 +5,16 @@ module.exports = function( grunt ) {
 		BUILD_DIR = 'build/',
 
 		WPF2BR_EXCLUDED_MISC = [
-			'!**/.idea/**',
 			'!**/assets/**',
 			'!**/bin/**',
 			'!**/build/**',
 			'!**/coverage/**',
-			'!**/nbproject/**',
 			'!**/node_modules/**',
 			'!**/tests/**',
 			'!Gruntfile.js*',
 			'!package.json*',
 			'!phpunit.xml*',
-			'!.{editorconfig,distignore,gitignore,jshintrc,travis.yml,DS_Store}'
+			'!.*'
 		];
 
 	// Load tasks.
