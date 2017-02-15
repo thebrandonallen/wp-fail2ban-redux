@@ -7,14 +7,14 @@
  * Author URI:      https://github.com/thebrandonallen
  * Text Domain:     wp-fail2ban-redux
  * Domain Path:     /languages
- * Version:         0.2.0
+ * Version:         0.2.1
  *
  * @package WP_Fail2Ban_Redux
  */
 
 /**
  *  Copyright 2012-2016 Charles Lecklider (email : wordpress@charles.lecklider.org)
- *  Copyright 2016      Brandon Allen
+ *  Copyright 2016-2017 Brandon Allen
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License, version 2, as

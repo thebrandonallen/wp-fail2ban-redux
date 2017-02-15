@@ -3,8 +3,8 @@ Contributors: thebrandonallen
 Donate link: https://brandonallen.me/donate/
 Tags: fail2ban, login, security, syslog
 Requires at least: 4.1.12
-Tested up to: 4.7.1
-Stable tag: 0.2.0
+Tested up to: 4.7.2
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,9 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 *Be ye forewarned: Future changes to WP fail2ban may break backwards compatibility with WP Fail2Ban Redux filters. No attempts will be made to fix this. So, even though it's not required, it is probably a good idea to update the filters anyway.*
 
 == Changelog ==
+
+= 0.2.1 =
+* Fix a stupid syntax error in the comment spam filter :( Thanks to @ichtarzan for reporting!
 
 = 0.2.0 =
 * Fixed PHP notices where `WP_Fail2Ban_Redux::comment_spam` expects two parameters. Decided it was probably a good idea to oblige.
