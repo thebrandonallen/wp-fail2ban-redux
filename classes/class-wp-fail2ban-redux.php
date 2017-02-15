@@ -253,7 +253,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 			}
 
 			// Bail if the comment isn't spam.
-			if ( empty( 'spam' !== $status ) ) {
+			if ( 'spam' !== $status ) {
 				return;
 			}
 
