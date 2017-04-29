@@ -125,14 +125,14 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 		}
 
 		/**
-		* Ends script execution and returns a 403 status code.
-		*
-		* @since 0.1.0
-		* @since 0.1.1 Added underscore prefix, because exit can't be used as a
-		*              method name in PHP > 7.
-		*
-		* @param string $action The logging action.
-		*/
+		 * Ends script execution and returns a 403 status code.
+		 *
+		 * @since 0.1.0
+		 * @since 0.1.1 Added underscore prefix, because `exit` is a reserved
+		 *              name in PHP < 7.
+		 *
+		 * @param string $action The logging action.
+		 */
 		public static function _exit( $action = '' ) {
 
 			/**
@@ -185,4 +185,4 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 			return self::$ip;
 		}
 	}
-}
+} // End if().
