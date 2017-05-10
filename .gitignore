@@ -1,3 +1,14 @@
-.DS_Store
-node_modules/
+# gitignore file for WP Fail2Ban Redux
+
+# Files and folders related to build/test tools
+/build
+/coverage
+/node_modules
+npm-debug.log
 phpcs.xml
+phpunit.xml
+wp-cli.local.yml
+
+# Operating system specific files
+.DS_Store
+Thumbs.db
