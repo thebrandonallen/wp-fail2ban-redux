@@ -34,8 +34,9 @@
 defined( 'ABSPATH' ) || exit;
 
 // Include the WP Fail2Ban Redux classes.
-require 'classes/class-wp-fail2ban-redux-log.php';
 require 'classes/class-wp-fail2ban-redux.php';
+require 'classes/class-wp-fail2ban-redux-log.php';
+require 'classes/class-wp-fail2ban-redux-logger.php';
 
 // Initialize the plugin.
 WP_Fail2Ban_Redux::get_instance();

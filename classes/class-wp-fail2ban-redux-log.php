@@ -40,48 +40,9 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 		 * @return bool True on success.
 		 */
 		public static function openlog( $action = '', $facility = LOG_AUTH ) {
-
-			/**
-			 * Filters the $indent parameter, which will be the `[DAEMON]`
-			 * portion of the example in the class PHPDoc, and will be passed to
-			 * `openlog()`.
-			 *
-			 * See {@link https://secure.php.net/manual/function.openlog.php}
-			 *
-			 * @since 0.1.0
-			 *
-			 * @param string $indent The syslog tag.
-			 * @param string $action The logging action.
-			 */
-			$indent = apply_filters( 'wp_fail2ban_redux_openlog_indent', "wp({$_SERVER['HTTP_HOST']})", $action );
-
-			/**
-			 * Filters the $option parameter, which is used to pass logging
-			 * options to `openlog()`.
-			 *
-			 * See {@link https://secure.php.net/manual/function.openlog.php}
-			 *
-			 * @since 0.1.0
-			 *
-			 * @param int    $option The syslog options.
-			 * @param string $action The logging action.
-			 */
-			$option = apply_filters( 'wp_fail2ban_redux_openlog_option', LOG_NDELAY|LOG_PID, $action );
-
-			/**
-			 * Filters the $facility parameter, which is used to tell `openlog()`
-			 * the type of program logging the message.
-			 *
-			 * See {@link https://secure.php.net/manual/function.openlog.php}
-			 *
-			 * @since 0.1.0
-			 *
-			 * @param int    $facility The type of program logging the message.
-			 * @param string $action   The logging action.
-			 */
-			$facility = apply_filters( 'wp_fail2ban_redux_openlog_facility', $facility, $action );
-
-			return openlog( $indent, $option, $facility );
+			_deprecated_function( __METHOD__, '0.3.0', 'WP_Fail2Ban_Redux_Logger::openlog()' );
+			$logger = WP_Fail2Ban_Redux::get_instance()->get_logger();
+			return $logger->openlog( $action, $facility );
 		}
 
 		/**
@@ -96,32 +57,9 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 		 * @return null|bool True on success. Null if no message passed. Else, false.
 		 */
 		public static function syslog( $message = '', $priority = LOG_NOTICE, $ip = '' ) {
-
-			// Don't log a message is none was passed.
-			if ( ! empty( $message ) ) {
-
-				/**
-				 * Filters the $priority parameter, which is used to tell
-				 * `syslog()` the message priority level.
-				 *
-				 * See {@link https://secure.php.net/manual/function.syslog.php}
-				 *
-				 * @since 0.1.0
-				 *
-				 * @param int    $priority The message priority level.
-				 * @param string $message  The log message with 'from {IP Address}' appended.
-				 */
-				$priority = apply_filters( 'wp_fail2ban_redux_syslog_priority', $priority, $message );
-
-				// Get the remote IP address if none was passed.
-				if ( empty( $ip ) ) {
-					$ip = self::get_remote_ip();
-				}
-
-				return syslog( $priority, "{$message} from {$ip}" );
-			}
-
-			return null;
+			_deprecated_function( __METHOD__, '0.3.0', 'WP_Fail2Ban_Redux_Logger::syslog()' );
+			$logger = WP_Fail2Ban_Redux::get_instance()->get_logger();
+			return $logger->syslog( $message, $priority, $ip );
 		}
 
 		/**
@@ -134,34 +72,9 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 		 * @param string $action The logging action.
 		 */
 		public static function _exit( $action = '' ) {
-
-			/**
-			 * Fires before the script is exited and a 403 status is returned.
-			 *
-			 * @since 0.1.0
-			 *
-			 * @param string $action The logging action.
-			 */
-			do_action( 'wp_fail2ban_redux_exit', $action );
-
-			/**
-			 * Filters the exit message.
-			 *
-			 * NOTE: There is no output escaping applied to the exit message.
-			 *       Please be safe, and escape your output, if you will be
-			 *       doing anything fancy with this filter.
-			 *
-			 * @since 0.1.0
-			 *
-			 * @param string|int $message The exit message.
-			 * @param string     $action  The logging action.
-			 */
-			$message = apply_filters( 'wp_fail2ban_redux_exit_message', 'Forbidden.', $action );
-
-			ob_end_clean();
-			header( 'HTTP/1.1 403 Forbidden' );
-			header( 'Content-Type: text/plain' );
-			exit( $message );
+			_deprecated_function( __METHOD__, '0.3.0', 'WP_Fail2Ban_Redux_Logger::_exit()' );
+			$logger = WP_Fail2Ban_Redux::get_instance()->get_logger();
+			$logger->_exit( $action );
 		}
 
 		/**

@@ -34,6 +34,15 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		private static $instance;
 
 		/**
+		 * The logger object.
+		 *
+		 * @since 0.3.0
+		 *
+		 * @var WP_Fail2Ban_Redux_Logger
+		 */
+		protected $logger;
+
+		/**
 		 * Provides access to a single instance of `WP_Fail2Ban_Redux` using the
 		 * singleton pattern.
 		 *
@@ -50,12 +59,35 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		}
 
 		/**
+		 * Sets the WP Fail2Ban Redux logger.
+		 *
+		 * @since 0.3.0
+		 *
+		 * @param WP_Fail2Ban_Redux_Logger $logger The logger class.
+		 */
+		public function set_logger( $logger ) {
+			$this->logger = $logger;
+		}
+
+		/**
+		 * Sets the WP Fail2Ban Redux logger.
+		 *
+		 * @since 0.3.0
+		 *
+		 * @return WP_Fail2Ban_Redux_Logger $logger The logger class.
+		 */
+		public function get_logger() {
+			return $this->logger;
+		}
+
+		/**
 		 * Constructor method.
 		 *
 		 * @since 0.1.1
 		 */
 		protected function __construct() {
 			$this->setup_actions();
+			$this->set_logger( new WP_Fail2Ban_Redux_Logger );
 		}
 
 		/**
@@ -146,9 +178,9 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 
 				// If the username is blocked, log, and return a 403.
 				if ( $blocked ) {
-					WP_Fail2Ban_Redux_Log::openlog( 'authenticate' );
-					WP_Fail2Ban_Redux_Log::syslog( "Blocked authentication attempt for {$username}" );
-					WP_Fail2Ban_Redux_Log::_exit( 'authenticate' );
+					$this->logger->openlog( 'authenticate' );
+					$this->logger->syslog( "Blocked authentication attempt for {$username}" );
+					$this->logger->_exit( 'authenticate' );
 				}
 			}
 
@@ -186,8 +218,8 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 			static $failure_count = 0;
 
 			// Log XML-RPC authentication failures.
-			WP_Fail2Ban_Redux_Log::openlog( 'xmlrpc_login_error' );
-			WP_Fail2Ban_Redux_Log::syslog( 'XML-RPC authentication failure' );
+			$this->logger->openlog( 'xmlrpc_login_error' );
+			$this->logger->syslog( 'XML-RPC authentication failure' );
 
 			// Bump the XML-RPC failure count.
 			$failure_count++;
@@ -198,7 +230,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 			 * that it's the result of a multicall.
 			 */
 			if ( 1 < $failure_count ) {
-				WP_Fail2Ban_Redux_Log::syslog( 'XML-RPC multicall authentication failure' );
+				$this->logger->syslog( 'XML-RPC multicall authentication failure' );
 			}
 
 			return $error;
@@ -217,8 +249,8 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 
 			// Don't log a pingback error if a pingback was already registered.
 			if ( 48 !== $error->code ) {
-				WP_Fail2Ban_Redux_Log::openlog( 'xmlrpc_pingback_error' );
-				WP_Fail2Ban_Redux_Log::syslog( "Pingback error {$error->code} generated" );
+				$this->logger->openlog( 'xmlrpc_pingback_error' );
+				$this->logger->syslog( "Pingback error {$error->code} generated" );
 			}
 
 			return $error;
@@ -263,8 +295,8 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 				return;
 			}
 
-			WP_Fail2Ban_Redux_Log::openlog( 'comment_spam' );
-			WP_Fail2Ban_Redux_Log::syslog( 'Spammed comment', LOG_NOTICE, $comment->comment_author_IP );
+			$this->logger->openlog( 'comment_spam' );
+			$this->logger->syslog( 'Spammed comment', LOG_NOTICE, $comment->comment_author_IP );
 		}
 
 		/**
@@ -307,9 +339,9 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 
 			// Maybe block and log user enumeration attempts.
 			if ( $enum ) {
-				WP_Fail2Ban_Redux_Log::openlog( 'user_enumeration' );
-				WP_Fail2Ban_Redux_Log::syslog( 'Blocked user enumeration attempt' );
-				WP_Fail2Ban_Redux_Log::_exit( 'user_enumeration' );
+				$this->logger->openlog( 'user_enumeration' );
+				$this->logger->syslog( 'Blocked user enumeration attempt' );
+				$this->logger->_exit( 'user_enumeration' );
 			}
 		}
 
@@ -321,8 +353,8 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 * @param string $username The username.
 		 */
 		public function wp_login( $username ) {
-			WP_Fail2Ban_Redux_Log::openlog( 'wp_login' );
-			WP_Fail2Ban_Redux_Log::syslog( "Accepted password for {$username}", LOG_INFO );
+			$this->logger->openlog( 'wp_login' );
+			$this->logger->syslog( "Accepted password for {$username}", LOG_INFO );
 		}
 
 		/**
@@ -347,8 +379,8 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 					 ? "Authentication attempt for unknown user {$username}"
 					 : "Authentication failure for {$existing}";
 
-			WP_Fail2Ban_Redux_Log::openlog( 'wp_login_failed' );
-			WP_Fail2Ban_Redux_Log::syslog( $message );
+			$this->logger->openlog( 'wp_login_failed' );
+			$this->logger->syslog( $message );
 		}
 
 		/**
@@ -393,8 +425,8 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 					$to = esc_url_raw( $args[1] );
 				}
 
-				WP_Fail2Ban_Redux_Log::openlog( 'xmlrpc_call_pingback', LOG_USER );
-				WP_Fail2Ban_Redux_Log::syslog( "Pingback requested for '{$to}'", LOG_INFO );
+				$this->logger->openlog( 'xmlrpc_call_pingback', LOG_USER );
+				$this->logger->syslog( "Pingback requested for '{$to}'", LOG_INFO );
 			}
 		}
 	}
