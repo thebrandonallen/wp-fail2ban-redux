@@ -46,7 +46,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 			 * portion of the example in the class PHPDoc, and will be passed to
 			 * `openlog()`.
 			 *
-			 * See {@link https://secure.php.net/manual/function.openlog.php}
+			 * @see https://secure.php.net/manual/function.openlog.php
 			 *
 			 * @since 0.1.0
 			 *
@@ -59,7 +59,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 			 * Filters the $option parameter, which is used to pass logging
 			 * options to `openlog()`.
 			 *
-			 * See {@link https://secure.php.net/manual/function.openlog.php}
+			 * @see https://secure.php.net/manual/function.openlog.php
 			 *
 			 * @since 0.1.0
 			 *
@@ -72,7 +72,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 			 * Filters the $facility parameter, which is used to tell `openlog()`
 			 * the type of program logging the message.
 			 *
-			 * See {@link https://secure.php.net/manual/function.openlog.php}
+			 * @see https://secure.php.net/manual/function.openlog.php
 			 *
 			 * @since 0.1.0
 			 *
@@ -104,7 +104,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 				 * Filters the $priority parameter, which is used to tell
 				 * `syslog()` the message priority level.
 				 *
-				 * See {@link https://secure.php.net/manual/function.syslog.php}
+				 * @see https://secure.php.net/manual/function.syslog.php
 				 *
 				 * @since 0.1.0
 				 *
@@ -169,7 +169,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 		 * should ensure that it is properly set, such as in wp-config.php, for
 		 * your environment.
 		 *
-		 * See {@link https://core.trac.wordpress.org/ticket/9235}
+		 * @see https://core.trac.wordpress.org/ticket/9235
 		 *
 		 * @since 0.3.0
 		 *

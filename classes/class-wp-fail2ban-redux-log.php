@@ -84,7 +84,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 		 * should ensure that it is properly set, such as in wp-config.php, for
 		 * your environment.
 		 *
-		 * See {@link https://core.trac.wordpress.org/ticket/9235}
+		 * @see https://core.trac.wordpress.org/ticket/9235
 		 *
 		 * @since 0.1.0
 		 *
