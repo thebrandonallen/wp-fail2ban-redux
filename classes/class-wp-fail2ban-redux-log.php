@@ -33,6 +33,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 		 * Calls PHP's `openlog()` function with our custom options.
 		 *
 		 * @since 0.1.0
+		 * @deprecated 0.3.0
 		 *
 		 * @param string $action   The logging action.
 		 * @param int    $facility The type of program logging the message.
@@ -49,6 +50,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 		 * Calls PHP's `syslog()` function with our custom options.
 		 *
 		 * @since 0.1.0
+		 * @deprecated 0.3.0
 		 *
 		 * @param string $message  The log message with 'from {IP Address}' appended.
 		 * @param int    $priority The message priority level.
@@ -68,6 +70,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 		 * @since 0.1.0
 		 * @since 0.1.1 Added underscore prefix, because `exit` is a reserved
 		 *              name in PHP < 7.
+		 * @deprecated 0.3.0
 		 *
 		 * @param string $action The logging action.
 		 */
