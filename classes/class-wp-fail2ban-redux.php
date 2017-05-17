@@ -313,6 +313,20 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 */
 		public function user_enumeration() {
 
+			/**
+			 * Filters the user enumeration boolean.
+			 *
+			 * @since 0.1.0
+			 *
+			 * @param bool $enum Defaults to false.
+			 */
+			$enum = (bool) apply_filters( 'wp_fail2ban_redux_block_user_enumeration', false );
+
+			// Bail if we're not blocking user enumeration.
+			if ( ! $enum ) {
+				return;
+			}
+
 			// Bail if we don't have an `author` or `author_name` request var.
 			if ( ! isset( $_GET['author'] ) && ! isset( $_GET['author_name'] ) ) {
 				return;
@@ -328,21 +342,10 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 				return;
 			}
 
-			/**
-			 * Filters the user enumeration boolean.
-			 *
-			 * @since 0.1.0
-			 *
-			 * @param bool $enum Defaults to false.
-			 */
-			$enum = (bool) apply_filters( 'wp_fail2ban_redux_block_user_enumeration', false );
-
-			// Maybe block and log user enumeration attempts.
-			if ( $enum ) {
-				$this->logger->openlog( 'user_enumeration' );
-				$this->logger->syslog( 'Blocked user enumeration attempt' );
-				$this->logger->_exit( 'user_enumeration' );
-			}
+			// Log user enumeration attempt, and return a 403 status.
+			$this->logger->openlog( 'user_enumeration' );
+			$this->logger->syslog( 'Blocked user enumeration attempt' );
+			$this->logger->_exit( 'user_enumeration' );
 		}
 
 		/**
