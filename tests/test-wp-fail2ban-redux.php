@@ -37,29 +37,6 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Utility method that resets permalinks and flushes rewrites.
-	 *
-	 * @since 0.3.0
-	 *
-	 * @global WP_Rewrite $wp_rewrite The WP_Rewrite global.
-	 *
-	 * @param string $structure The permalink structure. Optional.
-	 */
-	public function set_permalink_structure( $structure = '' ) {
-
-		// Use WP 4.4+'s version if it exists.
-		if ( method_exists( 'parent', 'set_permalink_structure' ) ) {
-			parent::set_permalink_structure( $structure );
-		} else {
-			global $wp_rewrite;
-
-			$wp_rewrite->init();
-			$wp_rewrite->set_permalink_structure( $structure );
-			$wp_rewrite->flush_rules();
-		}
-	}
-
-	/**
 	 * Return an array to block SpongeBob.
 	 *
 	 * @since 0.3.0
