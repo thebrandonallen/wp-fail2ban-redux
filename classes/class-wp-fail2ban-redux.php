@@ -369,18 +369,25 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 */
 		public function wp_login_failed( $username ) {
 
-			// Use the cache to check that the user actually exists.
+			// Set some default variables.
 			$existing = '';
-			if ( wp_cache_get( $username, 'userlogins' ) ) {
+
+			// If the user exists, the passed username/email will be cached.
+			// This serves as a cheap test for a known vs. unknown user.
+			$user_login = wp_cache_get( $username, 'userlogins' );
+			$user_email = wp_cache_get( $username, 'useremail' );
+
+			// Normalize the passed `$username` as the `user_login` if possible.
+			if ( $user_login ) {
 				$existing = $username;
-			} elseif ( wp_cache_get( $username, 'useremail' ) ) {
-				$existing = wp_cache_get( wp_cache_get( $username, 'useremail' ), 'users' )->user_login;
+			} elseif ( $user_email ) {
+				$existing = wp_cache_get( $user_email, 'users' )->user_login;
 			}
 
 			// Set our message variable based on the user's existence.
 			$message = empty( $existing )
-					 ? "Authentication attempt for unknown user {$username}"
-					 : "Authentication failure for {$existing}";
+				? "Authentication attempt for unknown user {$username}"
+				: "Authentication failure for {$existing}";
 
 			$this->logger->openlog( 'wp_login_failed' );
 			$this->logger->syslog( $message );
