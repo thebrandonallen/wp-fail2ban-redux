@@ -2,7 +2,8 @@
 /**
  * PHPUnit bootstrap file
  *
- * @package Wp_Fail2ban_Redux
+ * @package WP_Fail2Ban_Redux
+ * @subpackage Tests
  */
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
