@@ -61,9 +61,11 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 * Bump minimum required WordPress version to 4.4.
 
 ### 0.2.1 ###
+* Release date: 2017-02-15
 * Fix a stupid syntax error in the comment spam filter :( Thanks to @ichtarzan for reporting!
 
 ### 0.2.0 ###
+* Release date: 2016-09-27
 * Fixed PHP notices where `WP_Fail2Ban_Redux::comment_spam` expects two parameters. Decided it was probably a good idea to oblige.
 * User enumeration blocking now checks for both the `author` and `author_name` parameters. The `author_name` parameter could be used to validate the existence of a particular username, so blocking on this parameter as well will further reduce the attack surface.
 * Fixes an issue where user enumeration blocking was overzealous and would prevent actions in the admin area. Props [pjv](https://github.com/pjv). [#2](https://github.com/thebrandonallen/wp-fail2ban-redux/issues/2)
@@ -71,7 +73,9 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 * Added a note to `wordpress.conf` about the `logpath` parameter, and common auth log locations. *There is no need to changed existing configurations.* This is merely to aid setup for future users.
 
 ### 0.1.1 ###
+* Release date: 2016-07-23
 * In PHP < 7.0, `exit` isn't allowed as a method name. `WP_Fail2Ban_Redux_Log::exit` is now `WP_Fail2Ban_Redux_Log::_exit`.
 
 ### 0.1.0 ###
+* Release date: 2016-07-13
 * Initial release.
