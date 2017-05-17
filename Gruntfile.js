@@ -118,6 +118,17 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		phpunit: {
+			'default': {
+				cmd: 'phpunit',
+				args: ['-c', 'phpunit.xml.dist']
+			},
+			'codecoverage': {
+				cmd: 'phpunit',
+				args: ['-c', 'phpunit.xml.dist', '--coverage-clover=coverage.clover' ]
+			}
+		},
+
 		'string-replace': {
 			dev: {
 				files: {
@@ -161,6 +172,19 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'i18n',   ['checktextdomain', 'makepot'] );
 	grunt.registerTask( 'readme', ['wp_readme_to_markdown'] );
 	grunt.registerTask( 'build',  [ 'clean:all', 'string-replace:build', 'readme', 'i18n', 'copy:files' ] );
+
+	// PHPUnit test task.
+	grunt.registerMultiTask( 'phpunit', 'Runs PHPUnit tests, including the multisite tests.', function() {
+		grunt.util.spawn( {
+			cmd: this.data.cmd,
+			args: this.data.args,
+			opts: { stdio: 'inherit' }
+		}, this.async() );
+	} );
+
+	// Travis CI Tasks.
+	grunt.registerTask( 'travis:phpunit', ['phpunit:default'] );
+	grunt.registerTask( 'travis:codecoverage', 'Runs PHPUnit tasks with code-coverage generation.', ['phpunit:codecoverage'] );
 
 	grunt.util.linefeed = '\n';
 };

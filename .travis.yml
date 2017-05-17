@@ -1,29 +1,119 @@
+# Travis CI Configuration File
+
+# Use new Travis container-based infrastructure
+# http://docs.travis-ci.com/user/workers/container-based-infrastructure/
+sudo: false
+
+# Tell Travis CI we're using PHP
 language: php
 
-notifications:
-  email:
-    on_success: never
-    on_failure: change
-
-branches:
-  only:
-    - master
+# Configure caches
+cache:
+  apt: true
+  directories:
+    - node_modules
+    - vendor
+    - $HOME/.composer/cache
 
 php:
-  - 5.3
+  - 7.1
+  - 7.0
   - 5.6
+  - 5.5
+  - 5.4
+  - 5.3
+  - 5.2
 
 env:
-  - WP_VERSION=latest WP_MULTISITE=0
-  - WP_VERSION=3.7 WP_MULTISITE=0
-  - WP_VERSION=4.6-alpha-37575-src WP_MULTISITE=0
+  global:
+    - WPF2BR_TRAVISCI=travis:phpunit
+  matrix:
+    - WP_VERSION=master
+    - WP_VERSION=4.7
+    - WP_VERSION=4.6
+    - WP_VERSION=4.5
+    - WP_VERSION=4.4
 
 matrix:
+  fast_finish: true
   include:
-    - php: 5.3
-      env: WP_VERSION=latest WP_MULTISITE=1
+    - php: nightly
+      env: WP_VERSION=master
+    - php: 7.1
+      env: WP_VERSION=master WPF2BR_TRAVISCI=travis:codecoverage
+  exclude:
+    - php: 7.1
+      env: WP_VERSION=4.6
+    - php: 7.1
+      env: WP_VERSION=4.5
+    - php: 7.1
+      env: WP_VERSION=4.4
+  allow_failures:
+    - php: nightly
+    - env: WP_VERSION=master WPF2BR_TRAVISCI=travis:codecoverage
 
+before_install:
+  - bash bin/install-wp-tests-travis.sh wordpress_test root '' localhost $WP_VERSION
+  - npm --version
+  - node --version
+  - nvm install 6
+  - node --version
+  - npm --version
+  - npm install -g grunt-cli
+  - phpenv versions
+  - mysql --version
+  - php --version
+  - php -m
+  - which phpunit
+  - phpunit --version
+  - curl --version
+  - grunt --version
+  - git --version
+  - svn --version
+
+# Clones WordPress and configures our testing environment.
 before_script:
-  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  - |
+    # Remove Xdebug for a huge performance increase, but not from nightly:
+    if [[ "$WPF2BR_TRAVISCI" != "travis:codecoverage" ]]; then
+      phpenv config-rm xdebug.ini
+    fi
+  - |
+    # Export Composer's global bin dir to PATH, but not on PHP 5.2:
+    if [[ ${TRAVIS_PHP_VERSION:0:3} != "5.2" ]]; then
+      composer config --list --global
+      export PATH=`composer config --list --global | grep '\[home\]' | { read a; echo "${a#* }/vendor/bin:$PATH"; }`
+    fi
+  - |
+    # Install the specified version of PHPUnit depending on the PHP version:
+    if [[ "$WPF2BR_TRAVISCI" == "travis:phpunit" ]]; then
+      case "$TRAVIS_PHP_VERSION" in
+        7.1|7.0|nightly)
+          echo "Using PHPUnit 6.1"
+          composer global require "phpunit/phpunit=6.1.*"
+          ;;
+        5.6|5.5|5.4|5.3)
+          echo "Using PHPUnit 4.8"
+          composer global require "phpunit/phpunit=4.8.*"
+          ;;
+        5.2)
+          # Do nothing, use default PHPUnit 3.6.x
+          echo "Using default PHPUnit, hopefully 3.6"
+          ;;
+        *)
+          echo "No PHPUnit version handling for PHP version $TRAVIS_PHP_VERSION"
+          exit 1
+          ;;
+      esac
+    fi
+  - npm install
+  - npm prune
 
-script: phpunit
+script: grunt $WPF2BR_TRAVISCI
+
+after_script:
+  - |
+    if [[ "$WPF2BR_TRAVISCI" == "travis:codecoverage" ]] ; then
+      wget https://scrutinizer-ci.com/ocular.phar
+      php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+    fi
