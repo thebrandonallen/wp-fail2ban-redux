@@ -419,7 +419,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 				global $wp_xmlrpc_server;
 
 				$args = array();
-				if ( is_object( $wp_xmlrpc_server ) ) {
+				if ( isset( $wp_xmlrpc_server->message->params ) ) {
 					$args = $wp_xmlrpc_server->message->params;
 				}
 
