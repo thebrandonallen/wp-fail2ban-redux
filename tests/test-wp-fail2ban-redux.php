@@ -259,7 +259,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 		$comment = new stdClass;
 		$comment->ID = 20030527;
 		$comment->status = 'spam';
-		wp_cache_add( $comment->ID, new WP_Comment( $comment ), 'comment' );
+		wp_cache_add( $comment->ID, $comment, 'comment' );
 
 		$expected = 'openlog:comment_spam:syslog:Spammed comment';
 		$this->expectOutputString( $expected );
