@@ -32,6 +32,8 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 		/**
 		 * Calls PHP's `openlog()` function with our custom options.
 		 *
+		 * @see https://secure.php.net/manual/function.openlog.php
+		 *
 		 * @since 0.3.0
 		 *
 		 * @param string $action   The logging action.
@@ -86,6 +88,8 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 
 		/**
 		 * Calls PHP's `syslog()` function with our custom options.
+		 *
+		 * @see https://secure.php.net/manual/function.openlog.php
 		 *
 		 * @since 0.3.0
 		 *

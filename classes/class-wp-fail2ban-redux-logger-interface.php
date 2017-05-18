@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 interface WP_Fail2Ban_Redux_Logger_Interface {
 
 	/**
-	 * Calls PHP's `openlog()` function with our custom options.
+	 * Opens the specified log.
 	 *
 	 * @since 0.3.0
 	 *
@@ -31,7 +31,7 @@ interface WP_Fail2Ban_Redux_Logger_Interface {
 	public function openlog( $action = '', $facility = LOG_AUTH );
 
 	/**
-	 * Calls PHP's `syslog()` function with our custom options.
+	 * Writes a message to the log.
 	 *
 	 * @since 0.3.0
 	 *
@@ -44,7 +44,7 @@ interface WP_Fail2Ban_Redux_Logger_Interface {
 	public function syslog( $message = '', $priority = LOG_NOTICE, $ip = '' );
 
 	/**
-	 * Ends script execution and returns a 403 status code.
+	 * Ends script execution.
 	 *
 	 * @since 0.3.0
 	 *

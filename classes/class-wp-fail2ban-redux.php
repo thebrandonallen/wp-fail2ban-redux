@@ -64,6 +64,8 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 * @since 0.1.1
 		 */
 		public function __construct() {
+
+			// Initialize our default logger.
 			$this->set_logger( new WP_Fail2Ban_Redux_Logger );
 		}
 

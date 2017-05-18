@@ -5,7 +5,7 @@
  * @since 0.1.0
  *
  * @package WP_Fail2Ban_Redux
- * @subpackage WP_Fail2Ban_Redux_Log
+ * @subpackage Loggers
  */
 
 // Bail if accessed directly.
