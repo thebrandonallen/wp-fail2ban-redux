@@ -147,23 +147,50 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 			do_action( 'wp_fail2ban_redux_exit', $action );
 
 			/**
-			 * Filters the exit message.
-			 *
-			 * NOTE: There is no output escaping applied to the exit message.
-			 *       Please be safe, and escape your output if you will be
-			 *       doing anything fancy with this filter.
+			 * Filters the `wp_die` message parameter.
 			 *
 			 * @since 0.1.0
 			 *
 			 * @param string|int $message The exit message.
 			 * @param string     $action  The logging action.
 			 */
-			$message = apply_filters( 'wp_fail2ban_redux_exit_message', 'Forbidden.', $action );
+			$message = apply_filters(
+				'wp_fail2ban_redux_exit_message',
+				__( 'Forbidden.', 'wp-fail2ban-redux' ),
+				$action
+			);
 
-			ob_end_clean();
-			header( 'HTTP/1.1 403 Forbidden' );
-			header( 'Content-Type: text/plain' );
-			exit( $message );
+			/**
+			 * Filters the `wp_die` title parameter.
+			 *
+			 * @since 0.3.0
+			 *
+			 * @param string|int $title  The `wp_die` title.
+			 * @param string     $action The logging action.
+			 */
+			$title = apply_filters(
+				'wp_fail2ban_redux_exit_title',
+				__( 'Forbidden.', 'wp-fail2ban-redux' ),
+				$action
+			);
+
+			/**
+			 * Filters the `wp_die` args parameter.
+			 *
+			 * @since 0.3.0
+			 *
+			 * @param array|int $args   The `wp_die` args.
+			 * @param string    $action The logging action.
+			 */
+			$args = apply_filters(
+				'wp_fail2ban_redux_exit_wp_die_args',
+				array(
+					'response' => 403,
+				),
+				$action
+			);
+
+			wp_die( esc_html( $message ), esc_html( $title ), $args ); // WPCS: XSS okay ($args).
 		}
 
 		/**
