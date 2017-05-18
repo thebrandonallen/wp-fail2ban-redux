@@ -34,9 +34,27 @@
 defined( 'ABSPATH' ) || exit;
 
 // Include the WP Fail2Ban Redux classes.
-require 'classes/class-wp-fail2ban-redux.php';
-require 'classes/class-wp-fail2ban-redux-log.php';
-require 'classes/class-wp-fail2ban-redux-logger.php';
+require_once 'classes/class-wp-fail2ban-redux.php';
+require_once 'classes/class-wp-fail2ban-redux-logger-interface.php';
+require_once 'classes/class-wp-fail2ban-redux-logger.php';
+require_once 'classes/class-wp-fail2ban-redux-log.php';
 
-// Initialize the plugin.
-WP_Fail2Ban_Redux::get_instance();
+/**
+ * Initialize WP Fail2Ban Redux.
+ *
+ * @since 0.3.0
+ */
+function wp_fail2ban_redux_init() {
+
+	// Initialize the plugin.
+	$wpf2br = WP_Fail2Ban_Redux::get_instance();
+	$wpf2br->setup_actions();
+
+	/**
+	 * Fires after WP Fail2Ban Redux has been loaded and initialized.
+	 *
+	 * @since 0.3.0
+	 */
+	do_action( 'wp_fail2ban_redux_loaded' );
+}
+add_action( 'plugins_loaded', 'wp_fail2ban_redux_init' );

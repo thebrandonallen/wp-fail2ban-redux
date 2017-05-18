@@ -64,7 +64,6 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 * @since 0.1.1
 		 */
 		public function __construct() {
-			$this->setup_actions();
 			$this->set_logger( new WP_Fail2Ban_Redux_Logger );
 		}
 
@@ -95,7 +94,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 *
 		 * @since 0.1.1
 		 */
-		private function setup_actions() {
+		public function setup_actions() {
 
 			/* Filters ********************************************************/
 
