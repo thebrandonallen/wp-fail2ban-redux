@@ -59,6 +59,16 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		}
 
 		/**
+		 * Constructor method.
+		 *
+		 * @since 0.1.1
+		 */
+		public function __construct() {
+			$this->setup_actions();
+			$this->set_logger( new WP_Fail2Ban_Redux_Logger );
+		}
+
+		/**
 		 * Sets the WP Fail2Ban Redux logger.
 		 *
 		 * @since 0.3.0
@@ -78,16 +88,6 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 */
 		public function get_logger() {
 			return $this->logger;
-		}
-
-		/**
-		 * Constructor method.
-		 *
-		 * @since 0.1.1
-		 */
-		public function __construct() {
-			$this->setup_actions();
-			$this->set_logger( new WP_Fail2Ban_Redux_Logger );
 		}
 
 		/**
