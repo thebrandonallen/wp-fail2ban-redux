@@ -59,6 +59,11 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 ### 0.3.0 ###
 * Release data: TBD
 * Bump minimum required WordPress version to 4.4.
+* Performance improvements when not blocking user enumeration.
+* Use `wp_die` to exit, to allow for greater customization of exit messages.
+* Exit messages are now escaped using `esc_html`.
+* Refactored plugin loading.
+* You can now create your own, custom, logging class, in case you don't want to use the standard `syslog()` output.
 
 ### 0.2.1 ###
 * Release date: 2017-02-15
