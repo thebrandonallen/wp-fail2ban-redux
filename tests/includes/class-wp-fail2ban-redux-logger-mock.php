@@ -25,8 +25,6 @@ class WP_Fail2Ban_Redux_Logger_Mock implements WP_Fail2Ban_Redux_Logger_Interfac
 	 *
 	 * @param string $action   The logging action.
 	 * @param int    $facility The type of program logging the message.
-	 *
-	 * @return bool True on success.
 	 */
 	public function openlog( $action = '', $facility = LOG_AUTH ) {
 		echo 'openlog:' . $action; // WPCS: XSS okay.
@@ -40,8 +38,6 @@ class WP_Fail2Ban_Redux_Logger_Mock implements WP_Fail2Ban_Redux_Logger_Interfac
 	 * @param string $message  The log message with 'from {IP Address}' appended.
 	 * @param int    $priority The message priority level.
 	 * @param string $ip       The IP address.
-	 *
-	 * @return null|bool True on success. Null if no message passed. Else, false.
 	 */
 	public function syslog( $message = '', $priority = LOG_NOTICE, $ip = '' ) {
 		echo ':syslog:' . $message; // WPCS: XSS okay.

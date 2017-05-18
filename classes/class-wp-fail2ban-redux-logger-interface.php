@@ -39,7 +39,7 @@ interface WP_Fail2Ban_Redux_Logger_Interface {
 	 * @param int    $priority The message priority level.
 	 * @param string $ip       The IP address.
 	 *
-	 * @return null|bool True on success. Null if no message passed. Else, false.
+	 * @return null|bool True on success. Null if no message passed.
 	 */
 	public function syslog( $message = '', $priority = LOG_NOTICE, $ip = '' );
 
