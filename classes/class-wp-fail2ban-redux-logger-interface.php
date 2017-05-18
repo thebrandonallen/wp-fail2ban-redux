@@ -49,6 +49,8 @@ interface WP_Fail2Ban_Redux_Logger_Interface {
 	 * @since 0.3.0
 	 *
 	 * @param string $action The logging action.
+	 *
+	 * @return void
 	 */
 	public function _exit( $action = '' );
 }
