@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 0.3.0
  */
-class WP_Fail2Ban_Redux_Logger_Mock extends WP_Fail2Ban_Redux_Logger {
+class WP_Fail2Ban_Redux_Logger_Mock implements WP_Fail2Ban_Redux_Logger_Interface {
 
 	/**
 	 * Calls PHP's `openlog()` function with our custom options.
