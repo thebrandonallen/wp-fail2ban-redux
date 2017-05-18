@@ -29,7 +29,7 @@ class WP_Fail2Ban_Redux_Logger_Mock extends WP_Fail2Ban_Redux_Logger {
 	 * @return bool True on success.
 	 */
 	public function openlog( $action = '', $facility = LOG_AUTH ) {
-		echo 'openlog:' . $action;
+		echo 'openlog:' . $action; // WPCS: XSS okay.
 	}
 
 	/**
@@ -44,7 +44,7 @@ class WP_Fail2Ban_Redux_Logger_Mock extends WP_Fail2Ban_Redux_Logger {
 	 * @return null|bool True on success. Null if no message passed. Else, false.
 	 */
 	public function syslog( $message = '', $priority = LOG_NOTICE, $ip = '' ) {
-		echo ':syslog:' . $message;
+		echo ':syslog:' . $message; // WPCS: XSS okay.
 	}
 
 	/**
@@ -55,6 +55,6 @@ class WP_Fail2Ban_Redux_Logger_Mock extends WP_Fail2Ban_Redux_Logger {
 	 * @param string $action The logging action.
 	 */
 	public function _exit( $action = '' ) {
-		echo ':exit:' . $action;
+		echo ':exit:' . $action; // WPCS: XSS okay.
 	}
 }
