@@ -5,7 +5,7 @@
  * @since 0.3.0
  *
  * @package WP_Fail2Ban_Redux
- * @subpackage WP_Fail2Ban_Redux_Logger
+ * @subpackage Loggers
  */
 
 // Bail if accessed directly.
@@ -14,11 +14,11 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 
 	/**
-	 * The WP Fail2Ban Redux Log Class.
+	 * The WP Fail2Ban Redux Logger Class.
 	 *
 	 * @since 0.3.0
 	 */
-	class WP_Fail2Ban_Redux_Logger {
+	class WP_Fail2Ban_Redux_Logger implements WP_Fail2Ban_Redux_Logger_Interface {
 
 		/**
 		 * The remote IP address.
