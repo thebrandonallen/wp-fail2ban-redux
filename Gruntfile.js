@@ -1,6 +1,6 @@
+/* jshint node:true */
 module.exports = function( grunt ) {
 
-	'use strict';
 	var SOURCE_DIR = '',
 		BUILD_DIR = 'build/',
 
@@ -19,13 +19,11 @@ module.exports = function( grunt ) {
 		];
 
 	// Load tasks.
-	require( 'matchdep' ).filterDev([ 'grunt-*', '!grunt-legacy-util' ]).forEach( grunt.loadNpmTasks );
+	require( 'matchdep' ).filterDev(['grunt-*', '!grunt-legacy-util']).forEach( grunt.loadNpmTasks );
 
 	// Project configuration
 	grunt.initConfig( {
-
 		pkg: grunt.file.readJSON( 'package.json' ),
-
 		checktextdomain: {
 			options: {
 				text_domain: 'wp-fail2ban-redux',
@@ -48,36 +46,30 @@ module.exports = function( grunt ) {
 				]
 			},
 			files: {
-				src: [ '**/*.php' ].concat( WPF2BR_EXCLUDED_MISC ),
+				src: ['**/*.php'].concat( WPF2BR_EXCLUDED_MISC ),
 				expand: true
 			}
 		},
-
 		clean: {
 			all: [ BUILD_DIR ]
 		},
-
 		copy: {
 			files: {
-				files: [
-					{
-						cwd: '',
-						dest: 'build/',
-						dot: true,
-						expand: true,
-						src: ['**', '!**/.{svn,git}/**'].concat( WPF2BR_EXCLUDED_MISC )
-					}
-				]
+				files: [{
+					cwd: '',
+					dest: 'build/',
+					dot: true,
+					expand: true,
+					src: ['**', '!**/.{svn,git}/**'].concat( WPF2BR_EXCLUDED_MISC )
+				}]
 			}
 		},
-
 		jshint: {
 			options: grunt.file.readJSON( '.jshintrc' ),
 			grunt: {
 				src: ['Gruntfile.js']
 			}
 		},
-
 		makepot: {
 			target: {
 				options: {
@@ -117,7 +109,6 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
-
 		phpunit: {
 			'default': {
 				cmd: 'phpunit',
@@ -125,10 +116,9 @@ module.exports = function( grunt ) {
 			},
 			'codecoverage': {
 				cmd: 'phpunit',
-				args: ['-c', 'phpunit.xml.dist', '--coverage-clover=coverage.clover' ]
+				args: ['-c', 'phpunit.xml.dist', '--coverage-clover=coverage.clover']
 			}
 		},
-
 		'string-replace': {
 			dev: {
 				files: {
@@ -158,7 +148,6 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
-
 		wp_readme_to_markdown: {
 			your_target: {
 				files: {
@@ -171,7 +160,7 @@ module.exports = function( grunt ) {
 	// Register custom tasks.
 	grunt.registerTask( 'i18n',   ['checktextdomain', 'makepot'] );
 	grunt.registerTask( 'readme', ['wp_readme_to_markdown'] );
-	grunt.registerTask( 'build',  [ 'clean:all', 'string-replace:build', 'readme', 'i18n', 'copy:files' ] );
+	grunt.registerTask( 'build',  ['clean:all', 'string-replace:build', 'readme', 'i18n', 'copy:files'] );
 
 	// PHPUnit test task.
 	grunt.registerMultiTask( 'phpunit', 'Runs PHPUnit tests, including the multisite tests.', function() {
@@ -185,6 +174,4 @@ module.exports = function( grunt ) {
 	// Travis CI Tasks.
 	grunt.registerTask( 'travis:phpunit', ['phpunit:default'] );
 	grunt.registerTask( 'travis:codecoverage', 'Runs PHPUnit tasks with code-coverage generation.', ['phpunit:codecoverage'] );
-
-	grunt.util.linefeed = '\n';
 };
