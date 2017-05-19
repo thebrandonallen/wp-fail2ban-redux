@@ -7,7 +7,7 @@
  * Author URI:      https://github.com/thebrandonallen
  * Text Domain:     wp-fail2ban-redux
  * Domain Path:     /languages
- * Version:         0.2.1
+ * Version:         0.3.0
  *
  * @package WP_Fail2Ban_Redux
  */
