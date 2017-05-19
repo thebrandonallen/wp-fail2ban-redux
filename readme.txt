@@ -57,7 +57,7 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 == Changelog ==
 
 = 0.3.0 =
-* Release data: TBD
+* Release data: 2017-05-18
 * Bump minimum required WordPress version to 4.4.
 * Performance improvements when not blocking user enumeration.
 * Use `wp_die` to exit, to allow for greater customization of exit messages.
