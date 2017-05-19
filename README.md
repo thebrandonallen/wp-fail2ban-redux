@@ -4,7 +4,7 @@
 **Tags:** fail2ban, login, security, syslog  
 **Requires at least:** 4.4  
 **Tested up to:** 4.8  
-**Stable tag:** 0.3.0  
+**Stable tag:** 0.3.1  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -56,7 +56,7 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 
 ## Changelog ##
 
-### 0.3.0 ###
+### 0.3.1 ###
 * Release data: 2017-05-18
 * Bump minimum required WordPress version to 4.4.
 * Performance improvements when not blocking user enumeration.
@@ -64,6 +64,9 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 * Exit messages are now escaped using `esc_html`.
 * Refactored plugin loading.
 * You can now create your own, custom, logging class, in case you don't want to use the standard `syslog()` output.
+
+### 0.3.0 ###
+* Superseded by 0.3.1
 
 ### 0.2.1 ###
 * Release date: 2017-02-15
