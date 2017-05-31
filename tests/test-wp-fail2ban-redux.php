@@ -63,6 +63,91 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Test `wp_fail2ban_redux_init()`.
+	 *
+	 * @since 0.4.0
+	 *
+	 * @covers ::wp_fail2ban_redux_init
+	 */
+	public function test_wp_fail2ban_redux_init() {
+		$this->assertEquals( 1, did_action( 'wp_fail2ban_redux_loaded' ) );
+
+		wp_fail2ban_redux_init();
+		$this->assertEquals( 2, did_action( 'wp_fail2ban_redux_loaded' ) );
+	}
+
+	/**
+	 * Test `WP_Fail2Ban_Redux::set_logger()`.
+	 *
+	 * @since 0.4.0
+	 *
+	 * @covers WP_Fail2Ban_Redux::set_logger
+	 */
+	public function test_set_logger() {
+		$wpf2br = WP_Fail2Ban_Redux::get_instance();
+
+		$this->assertInstanceOf( 'WP_Fail2Ban_Redux_Logger_Interface', $wpf2br->get_logger() );
+
+		$wpf2br->set_logger( null );
+		$this->assertNull( $wpf2br->get_logger() );
+
+		$wpf2br->set_logger( new WP_Fail2Ban_Redux_Logger_Mock );
+		$this->assertInstanceOf( 'WP_Fail2Ban_Redux_Logger_Interface', $wpf2br->get_logger() );
+	}
+
+	/**
+	 * Test `WP_Fail2Ban_Redux::get_logger()`.
+	 *
+	 * @since 0.4.0
+	 *
+	 * @covers WP_Fail2Ban_Redux::get_logger
+	 */
+	public function test_get_logger() {
+		$wpf2br = WP_Fail2Ban_Redux::get_instance();
+
+		$this->assertInstanceOf( 'WP_Fail2Ban_Redux_Logger_Interface', $wpf2br->get_logger() );
+
+		$wpf2br->set_logger( null );
+		$this->assertNull( $wpf2br->get_logger() );
+
+		$wpf2br->set_logger( new WP_Fail2Ban_Redux_Logger_Mock );
+		$this->assertInstanceOf( 'WP_Fail2Ban_Redux_Logger_Interface', $wpf2br->get_logger() );
+	}
+
+	/**
+	 * Test `WP_Fail2Ban_Redux::setup_actions()`.
+	 *
+	 * @since 0.4.0
+	 *
+	 * @covers WP_Fail2Ban_Redux::setup_actions
+	 */
+	public function test_setup_actions() {
+		$wpf2br = WP_Fail2Ban_Redux::get_instance();
+
+		remove_filter( 'authenticate', array( $wpf2br, 'authenticate' ), 1, 2 );
+		remove_filter( 'xmlrpc_login_error', array( $wpf2br, 'xmlrpc_login_error' ), 1 );
+		remove_filter( 'xmlrpc_pingback_error', array( $wpf2br, 'xmlrpc_pingback_error' ), 1 );
+		remove_action( 'comment_post', array( $wpf2br, 'comment_spam' ), 10, 2 );
+		remove_action( 'parse_request', array( $wpf2br, 'user_enumeration' ), 12 );
+		remove_action( 'wp_login', array( $wpf2br, 'wp_login' ) );
+		remove_action( 'wp_login_failed', array( $wpf2br, 'wp_login_failed' ) );
+		remove_action( 'wp_set_comment_status', array( $wpf2br, 'comment_spam' ), 10, 2 );
+		remove_action( 'xmlrpc_call', array( $wpf2br, 'xmlrpc_call' ), 1 );
+
+		$wpf2br->setup_actions();
+
+		$this->assertNotEmpty( has_filter( 'authenticate', array( $wpf2br, 'authenticate' ), 1 ) );
+		$this->assertNotEmpty( has_filter( 'xmlrpc_login_error', array( $wpf2br, 'xmlrpc_login_error' ), 1 ) );
+		$this->assertNotEmpty( has_filter( 'xmlrpc_pingback_error', array( $wpf2br, 'xmlrpc_pingback_error' ), 1 ) );
+		$this->assertNotEmpty( has_action( 'comment_post', array( $wpf2br, 'comment_spam' ) ) );
+		$this->assertNotEmpty( has_action( 'parse_request', array( $wpf2br, 'user_enumeration' ), 12 ) );
+		$this->assertNotEmpty( has_action( 'wp_login', array( $wpf2br, 'wp_login' ) ) );
+		$this->assertNotEmpty( has_action( 'wp_login_failed', array( $wpf2br, 'wp_login_failed' ) ) );
+		$this->assertNotEmpty( has_action( 'wp_set_comment_status', array( $wpf2br, 'comment_spam' ) ) );
+		$this->assertNotEmpty( has_action( 'xmlrpc_call', array( $wpf2br, 'xmlrpc_call' ), 1 ) );
+	}
+
+	/**
 	 * Test `WP_Fail2Ban_Redux::authenticate` when there are no blocked users.
 	 *
 	 * @since 0.3.0
