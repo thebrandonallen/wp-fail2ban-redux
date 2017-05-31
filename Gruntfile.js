@@ -13,6 +13,7 @@ module.exports = function( grunt ) {
 			'!**/tests/**',
 			'!Gruntfile.js*',
 			'!package.json*',
+			'!package-lock.json*',
 			'!phpcs.xml*',
 			'!phpunit.xml*',
 			'!.*'
