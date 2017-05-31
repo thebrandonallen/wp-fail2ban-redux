@@ -3,6 +3,8 @@
   "version": "0.3.1",
   "main": "Gruntfile.js",
   "author": "Brandon Allen",
+  "license": "GPL-2.0",
+  "repository": "github:thebrandonallen/wp-fail2ban-redux",
   "devDependencies": {
     "grunt": "~1.0.1",
     "grunt-checktextdomain": "~1.0.1",
