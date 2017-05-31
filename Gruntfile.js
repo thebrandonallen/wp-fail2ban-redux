@@ -126,7 +126,7 @@ module.exports = function( grunt ) {
 				},
 				options: {
 					replacements: [{
-						pattern: /(\* Version:\s*)(.*)$/gm, // For plugin header
+						pattern: /(\*\sVersion:\s+)(.*)$/gm, // For plugin header
 						replacement: '$1<%= pkg.version %>'
 					}]
 				}
@@ -138,12 +138,16 @@ module.exports = function( grunt ) {
 				},
 				options: {
 					replacements: [{
-						pattern: /(\* Version:\s*)(.*)$/gm, // For plugin header
+						pattern: /(\*\sVersion:\s+)(.*)$/gm, // For plugin header
 						replacement: '$1<%= pkg.version %>'
 					},
 					{
-						pattern: /(Stable tag:[\*\ ]*)(.*\S)/gim, // For readme.*
+						pattern: /(Stable\stag:\s+)(.*)/gm, // For readme.txt
 						replacement: '$1<%= pkg.version %>'
+					},
+					{
+						pattern: /(Copyright\s2016-)[0-9]{4}(\s+?Brandon\sAllen)/gm, // For Copyright.
+						replacement: '$1<%= grunt.template.today("UTC:yyyy") %>$2'
 					}]
 				}
 			}
