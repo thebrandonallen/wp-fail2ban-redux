@@ -52,7 +52,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 */
 		public static function get_instance() {
 			if ( null === self::$instance ) {
-				self::$instance = new self;
+				self::$instance = new self();
 			}
 
 			return self::$instance;
@@ -66,7 +66,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		public function __construct() {
 
 			// Initialize our default logger.
-			$this->set_logger( new WP_Fail2Ban_Redux_Logger );
+			$this->set_logger( new WP_Fail2Ban_Redux_Logger() );
 		}
 
 		/**

@@ -33,7 +33,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 		$this->wpf2br = WP_Fail2Ban_Redux::get_instance();
 
 		// Set the logger to our mock.
-		$this->wpf2br->set_logger( new WP_Fail2Ban_Redux_Logger_Mock );
+		$this->wpf2br->set_logger( new WP_Fail2Ban_Redux_Logger_Mock() );
 	}
 
 	/**
@@ -91,7 +91,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 		$wpf2br->set_logger( null );
 		$this->assertNull( $wpf2br->get_logger() );
 
-		$wpf2br->set_logger( new WP_Fail2Ban_Redux_Logger_Mock );
+		$wpf2br->set_logger( new WP_Fail2Ban_Redux_Logger_Mock() );
 		$this->assertInstanceOf( 'WP_Fail2Ban_Redux_Logger_Interface', $wpf2br->get_logger() );
 	}
 
@@ -110,7 +110,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 		$wpf2br->set_logger( null );
 		$this->assertNull( $wpf2br->get_logger() );
 
-		$wpf2br->set_logger( new WP_Fail2Ban_Redux_Logger_Mock );
+		$wpf2br->set_logger( new WP_Fail2Ban_Redux_Logger_Mock() );
 		$this->assertInstanceOf( 'WP_Fail2Ban_Redux_Logger_Interface', $wpf2br->get_logger() );
 	}
 
@@ -282,7 +282,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 	 */
 	public function test_xmlrpc_pingback_error() {
 
-		$error = new stdClass;
+		$error = new stdClass();
 		$error->code = 0;
 
 		$expected = "openlog:xmlrpc_pingback_error:syslog:Pingback error {$error->code} generated";
@@ -299,7 +299,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 	 */
 	public function test_xmlrpc_pingback_error_pingback_exists() {
 
-		$error = new stdClass;
+		$error = new stdClass();
 		$error->code = 48;
 
 		$this->expectOutputString( '' );
@@ -318,7 +318,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 		add_filter( 'wp_fail2ban_redux_log_spam_comments', '__return_true' );
 
 		// Fake a comment, and cache it so `get_comment()` can find it.
-		$comment = new stdClass;
+		$comment = new stdClass();
 		$comment->ID = 20030527;
 		$comment->status = 'spam';
 		wp_cache_add( $comment->ID, $comment, 'comment' );
@@ -552,8 +552,8 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 	public function test_xmlrpc_call() {
 
 		// Create a fake `wp_xmlrpc_server` object.
-		$wp_xmlrpc_server                  = new stdClass;
-		$wp_xmlrpc_server->message         = new stdClass;
+		$wp_xmlrpc_server                  = new stdClass();
+		$wp_xmlrpc_server->message         = new stdClass();
 		$wp_xmlrpc_server->message->params = array(
 			1 => 'http://spongebob.example.com',
 		);
@@ -581,7 +581,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 		global $wp_xmlrpc_server;
 
 		// Create a fake `wp_xmlrpc_server` object.
-		$wp_xmlrpc_server = new stdClass;
+		$wp_xmlrpc_server = new stdClass();
 
 		add_filter( 'wp_fail2ban_redux_log_pingbacks', '__return_true' );
 
