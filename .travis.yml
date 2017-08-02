@@ -4,6 +4,8 @@
 # http://docs.travis-ci.com/user/workers/container-based-infrastructure/
 sudo: false
 
+dist: trusty
+
 # Tell Travis CI we're using PHP
 language: php
 
@@ -19,13 +21,13 @@ php:
   - 7.1
   - 7.0
   - 5.6
-  - 5.2
 
 env:
   global:
     - WPF2BR_TRAVISCI=travis:phpunit
   matrix:
     - WP_VERSION=master
+    - WP_VERSION=4.8
     - WP_VERSION=4.7
     - WP_VERSION=4.6
     - WP_VERSION=4.5
@@ -34,10 +36,30 @@ env:
 matrix:
   fast_finish: true
   include:
-    - php: nightly
+    - php: 5.2
       env: WP_VERSION=master
+      dist: precise
+    - php: 5.2
+      env: WP_VERSION=4.8
+      dist: precise
+    - php: 5.2
+      env: WP_VERSION=4.7
+      dist: precise
+    - php: 5.2
+      env: WP_VERSION=4.6
+      dist: precise
+    - php: 5.2
+      env: WP_VERSION=4.5
+      dist: precise
+    - php: 5.2
+      env: WP_VERSION=4.4
+      dist: precise
     - php: 7.1
       env: WP_VERSION=master WPF2BR_TRAVISCI=travis:codecoverage
+    - php: nightly
+      env: WP_VERSION=master
+    - php: 7.2
+      env: WP_VERSION=master
   exclude:
     - php: 7.1
       env: WP_VERSION=4.6
@@ -47,6 +69,7 @@ matrix:
       env: WP_VERSION=4.4
   allow_failures:
     - php: nightly
+    - php: 7.2
     - env: WP_VERSION=master WPF2BR_TRAVISCI=travis:codecoverage
 
 before_install:
@@ -72,8 +95,10 @@ before_install:
 before_script:
   - |
     # Remove Xdebug for a huge performance increase, but not from nightly:
-    if [[ "$WPF2BR_TRAVISCI" != "travis:codecoverage" ]]; then
+    if [[ "$WPF2BR_TRAVISCI" != "travis:codecoverage" && -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]]; then
       phpenv config-rm xdebug.ini
+    else
+      echo "We are running codecoverage or xdebug.ini does not exist"
     fi
   - |
     # Export Composer's global bin dir to PATH, but not on PHP 5.2:
@@ -85,7 +110,7 @@ before_script:
     # Install the specified version of PHPUnit depending on the PHP version:
     if [[ "$WPF2BR_TRAVISCI" == "travis:phpunit" ]]; then
       case "$TRAVIS_PHP_VERSION" in
-        7.1|7.0|nightly)
+        7.2|7.1|7.0|nightly)
           echo "Using PHPUnit 6.1"
           composer global require "phpunit/phpunit=6.1.*"
           ;;
