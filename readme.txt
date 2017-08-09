@@ -34,6 +34,8 @@ The core functionality between *WP Fail2Ban Redux* and WP fail2ban remains the s
 * Authentication attempts for blocked usernames.
 * Spammed comments.
 
+Extra documentation is available on the [WP Fail2Ban Redux GitHub Wiki](https://github.com/thebrandonallen/wp-fail2ban-redux/wiki).
+
 == Installation ==
 
 1. Upload the plugin to your plugins directory.
