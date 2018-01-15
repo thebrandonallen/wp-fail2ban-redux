@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [0.4.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.4.0) - 2018-01-15 ##
+### Added ###
+* New filter, `wp_fail2ban_redux_openlog_ident`, because it's `ident` not `indent`.
+
+### Changed ###
+* Bumped the minimum required WordPress version to 4.5.
+* Bumped the minimum required PHP version to 5.3. This is a soft bump, meaning, nothing changed that will break PHP 5.2 compatability. However, this could easily change in the future, and PHP 5.2 is no longer actively tested.
+
+### Deprecated ###
+* Deprecated the `wp_fail2ban_redux_openlog_indent` filter.
+
 ## [0.3.1](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.3.1) - 2017-05-18 ##
 ### Added ###
 * Introduce `WP_Fail2Ban_Redux_Logger` as the new logger class.
@@ -54,3 +65,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [0.1.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.1.0) - 2016-07-13 ##
 * Initial release.
+
+[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/0.4.0...develop
+[0.4.0]: https://github.com/olivierlacan/keep-a-changelog/compare/0.3.1...0.4.0
+[0.3.1]: https://github.com/olivierlacan/keep-a-changelog/compare/0.3.0...0.3.1
+[0.3.0]: https://github.com/olivierlacan/keep-a-changelog/compare/0.2.1...0.3.0
+[0.2.1]: https://github.com/olivierlacan/keep-a-changelog/compare/0.2.0...0.2.1
+[0.2.0]: https://github.com/olivierlacan/keep-a-changelog/compare/0.1.1...0.2.0
+[0.1.1]: https://github.com/olivierlacan/keep-a-changelog/compare/0.1.0...0.1.1
