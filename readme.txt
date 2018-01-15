@@ -59,8 +59,14 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 
 == Changelog ==
 
+= 0.4.0 =
+* Release date: 2018-01-15
+* Bumped the minimum required WordPress version to 4.5.
+* Bumped the minimum required PHP version to 5.3. This is a soft bump, meaning, nothing changed that will break PHP 5.2 compatability. However, this could easily change in the future, and PHP 5.2 is no longer actively tested.
+* Renamed the `wp_fail2ban_redux_openlog_indent` filter to `wp_fail2ban_redux_openlog_ident`, because... it was misspelled.
+
 = 0.3.1 =
-* Release data: 2017-05-18
+* Release date: 2017-05-18
 * Bump minimum required WordPress version to 4.4.
 * Performance improvements when not blocking user enumeration.
 * Use `wp_die` to exit, to allow for greater customization of exit messages.
