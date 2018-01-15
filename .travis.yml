@@ -31,7 +31,6 @@ env:
     - WP_VERSION=4.7
     - WP_VERSION=4.6
     - WP_VERSION=4.5
-    - WP_VERSION=4.4
 
 matrix:
   fast_finish: true
@@ -51,9 +50,6 @@ matrix:
     - php: 5.2
       env: WP_VERSION=4.5
       dist: precise
-    - php: 5.2
-      env: WP_VERSION=4.4
-      dist: precise
     - php: 7.1
       env: WP_VERSION=master WPF2BR_TRAVISCI=travis:codecoverage
     - php: nightly
@@ -65,8 +61,6 @@ matrix:
       env: WP_VERSION=4.6
     - php: 7.1
       env: WP_VERSION=4.5
-    - php: 7.1
-      env: WP_VERSION=4.4
   allow_failures:
     - php: nightly
     - php: 7.2
