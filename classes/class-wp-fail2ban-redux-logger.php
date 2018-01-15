@@ -43,19 +43,26 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 		 */
 		public function openlog( $action = '', $facility = LOG_AUTH ) {
 
+			// Setup the initial `$ident` value.
+			$ident = "wp({$_SERVER['HTTP_HOST']})";
+
+			/* Deprecated. Do not use. */
+			/* See https://github.com/thebrandonallen/wp-fail2ban-redux/issues/7 */
+			$ident = apply_filters( 'wp_fail2ban_redux_openlog_indent', $ident, $action );
+
 			/**
-			 * Filters the $indent parameter, which will be the `[DAEMON]`
+			 * Filters the $ident parameter, which will be the `[DAEMON]`
 			 * portion of the example in the class PHPDoc, and will be passed to
 			 * `openlog()`.
 			 *
 			 * @see https://secure.php.net/manual/function.openlog.php
 			 *
-			 * @since 0.1.0
+			 * @since 0.4.0
 			 *
-			 * @param string $indent The syslog tag.
+			 * @param string $ident  The syslog tag.
 			 * @param string $action The logging action.
 			 */
-			$indent = apply_filters( 'wp_fail2ban_redux_openlog_indent', "wp({$_SERVER['HTTP_HOST']})", $action );
+			$ident = apply_filters( 'wp_fail2ban_redux_openlog_ident', $ident, $action );
 
 			/**
 			 * Filters the $option parameter, which is used to pass logging
@@ -83,7 +90,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 			 */
 			$facility = apply_filters( 'wp_fail2ban_redux_openlog_facility', $facility, $action );
 
-			return openlog( $indent, $option, $facility );
+			return openlog( $ident, $option, $facility );
 		}
 
 		/**
