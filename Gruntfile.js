@@ -147,7 +147,7 @@ module.exports = function( grunt ) {
 						replacement: '$1<%= pkg.version %>'
 					},
 					{
-						pattern: /(Copyright\s2016-)[0-9]{4}(\s+?Brandon\sAllen)/gm, // For Copyright.
+						pattern: /(Copyright\s\(C\)\s2016-)[0-9]{4}(\s+?Brandon\sAllen)/gm, // For Copyright.
 						replacement: '$1<%= grunt.template.today("UTC:yyyy") %>$2'
 					}]
 				}
