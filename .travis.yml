@@ -35,19 +35,19 @@ env:
 matrix:
   fast_finish: true
   include:
-    - php: 5.2
+    - php: 5.3
       env: WP_VERSION=master
       dist: precise
-    - php: 5.2
+    - php: 5.3
       env: WP_VERSION=4.8
       dist: precise
-    - php: 5.2
+    - php: 5.3
       env: WP_VERSION=4.7
       dist: precise
-    - php: 5.2
+    - php: 5.3
       env: WP_VERSION=4.6
       dist: precise
-    - php: 5.2
+    - php: 5.3
       env: WP_VERSION=4.5
       dist: precise
     - php: 7.1
@@ -111,10 +111,6 @@ before_script:
         5.6|5.5|5.4|5.3)
           echo "Using PHPUnit 4.x"
           composer global require "phpunit/phpunit:^4"
-          ;;
-        5.2)
-          # Do nothing, use default PHPUnit 3.6.x
-          echo "Using default PHPUnit, hopefully 3.6"
           ;;
         *)
           echo "No PHPUnit version handling for PHP version $TRAVIS_PHP_VERSION"
