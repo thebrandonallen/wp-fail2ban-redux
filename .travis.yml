@@ -27,7 +27,7 @@ env:
   global:
     - WPF2BR_TRAVISCI=travis:phpunit
   matrix:
-    - WP_VERSION=master
+    - WP_VERSION=trunk
     - WP_VERSION=4.9
     - WP_VERSION=4.8
     - WP_VERSION=4.7
@@ -38,7 +38,7 @@ matrix:
   fast_finish: true
   include:
     - php: 5.3
-      env: WP_VERSION=master
+      env: WP_VERSION=trunk
       dist: precise
     - php: 5.3
       env: WP_VERSION=4.9
@@ -56,9 +56,17 @@ matrix:
       env: WP_VERSION=4.5
       dist: precise
     - php: 7.1
-      env: WP_VERSION=master WPF2BR_TRAVISCI=travis:codecoverage
+      env: WP_VERSION=trunk WPF2BR_TRAVISCI=travis:codecoverage
     - php: nightly
-      env: WP_VERSION=master
+      env: WP_VERSION=trunk
+    - php: 7.3.0RC1
+      sudo: required
+      dist: xenial
+      services: mysql
+      addons:
+        apt:
+          packages:
+            - libzip4
   exclude:
     - php: 7.2
       env: WP_VERSION=4.8
@@ -74,13 +82,14 @@ matrix:
       env: WP_VERSION=4.5
   allow_failures:
     - php: nightly
-    - env: WP_VERSION=master WPF2BR_TRAVISCI=travis:codecoverage
+    - php: 7.3.0RC1
+    - env: WP_VERSION=trunk WPF2BR_TRAVISCI=travis:codecoverage
 
 before_install:
-  - bash bin/install-wp-tests-travis.sh wordpress_test root '' localhost $WP_VERSION
+  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
   - npm --version
   - node --version
-  - nvm install 6
+  - nvm install 8
   - node --version
   - npm --version
   - npm install -g grunt-cli
@@ -114,13 +123,13 @@ before_script:
     # Install the specified version of PHPUnit depending on the PHP version:
     if [[ "$WPF2BR_TRAVISCI" == "travis:phpunit" ]]; then
       case "$TRAVIS_PHP_VERSION" in
-        7.2|7.1|7.0|nightly)
+        7.3.0RC1|7.2|7.1|7.0|nightly)
           echo "Using PHPUnit 6.x"
-          composer global require "phpunit/phpunit:^6"
+          travis_retry composer global require "phpunit/phpunit:^6"
           ;;
         5.6|5.5|5.4|5.3)
           echo "Using PHPUnit 4.x"
-          composer global require "phpunit/phpunit:^4"
+          travis_retry composer global require "phpunit/phpunit:^4"
           ;;
         *)
           echo "No PHPUnit version handling for PHP version $TRAVIS_PHP_VERSION"
