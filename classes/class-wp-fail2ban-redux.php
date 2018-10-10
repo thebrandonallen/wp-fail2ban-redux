@@ -441,4 +441,4 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 			}
 		}
 	}
-} // End if().
+} // End if.

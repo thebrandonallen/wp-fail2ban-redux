@@ -101,4 +101,4 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 			return self::$ip;
 		}
 	}
-} // End if().
+} // End if.
