@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [0.5.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.5.0) - TBD ##
+### Added ###
+* Add better support for use as a must-use plugin in the `mu-plugins` directory.
+
+### Changed ###
+* Moved all files/folders into a new directory `wp-fail2ban-redux/wp-fail2ban-redux`.
+
 ## [0.4.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.4.0) - 2018-01-15 ##
 ### Added ###
 * New filter, `wp_fail2ban_redux_openlog_ident`, because it's `ident` not `indent`.

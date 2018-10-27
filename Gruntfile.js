@@ -134,8 +134,9 @@ module.exports = function( grunt ) {
 			},
 			build: {
 				files: {
+					'CHANGELOG.md': 'CHANGELOG.md',
+					'readme.txt': 'readme.txt',
 					'wp-fail2ban-redux.php': 'wp-fail2ban-redux.php',
-					'readme.txt': 'readme.txt'
 				},
 				options: {
 					replacements: [{
@@ -149,6 +150,14 @@ module.exports = function( grunt ) {
 					{
 						pattern: /(Copyright\s\(C\)\s2016-)[0-9]{4}(\s+?Brandon\sAllen)/gm, // For Copyright.
 						replacement: '$1<%= grunt.template.today("UTC:yyyy") %>$2'
+					},
+					{
+						pattern: /(\*\sRelease\sdate:\s)(TBD|TBA|TDB)$/gm,
+						replacement: '$1<%= grunt.template.today("yyyy-mm-dd") %>'
+					},
+					{
+						pattern: /^(##\s.*\s-\s)(TBD|TBA|TDB)\s##$/gm,
+						replacement: '$1<%= grunt.template.today("yyyy-mm-dd") %> ##'
 					}]
 				}
 			}

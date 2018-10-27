@@ -3,7 +3,7 @@
 **Donate link:** https://brandonallen.me/donate/  
 **Tags:** fail2ban, login, security, syslog  
 **Requires at least:** 4.5  
-**Tested up to:** 4.9.1  
+**Tested up to:** 4.9.8  
 **Requires PHP:** 5.3  
 **Stable tag:** 0.4.0  
 **License:** GPLv2 or later  
@@ -57,7 +57,14 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 
 *Be ye forewarned: Future changes to WP fail2ban may break backwards compatibility with WP Fail2Ban Redux filters. No attempts will be made to fix this. So, even though it's not required, it is probably a good idea to update the filters anyway.*
 
+### Can I use this as a must-use plugin in the `mu-plugins` folder?
+As of version 0.5.0, yes! Download the plugin, and unzip. Inside the plugin folder will be another folder named `wp-fail2ban-redux` and `wp-fail2ban-redux.php`. Upload this folder and file to the `mu-plugins` directory of your site.
+###
 ## Changelog ##
+
+### 0.5.0 ###
+* Release date: TBD
+* Add better support for use as a must-use plugin in the `mu-plugins` directory.
 
 ### 0.4.0 ###
 * Release date: 2018-01-15
