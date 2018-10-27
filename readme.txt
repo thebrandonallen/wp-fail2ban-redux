@@ -5,7 +5,7 @@ Tags: fail2ban, login, security, syslog
 Requires at least: 4.5
 Tested up to: 4.9.8
 Requires PHP: 5.3
-Stable tag: 0.4.0
+Stable tag: 0.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -63,7 +63,7 @@ As of version 0.5.0, yes! Download the plugin, and unzip. Inside the plugin fold
 == Changelog ==
 
 = 0.5.0 =
-* Release date: TBD
+* Release date: 2018-10-27
 * Add better support for use as a must-use plugin in the `mu-plugins` directory.
 
 = 0.4.0 =

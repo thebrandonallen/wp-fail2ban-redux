@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
-## [0.5.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.5.0) - TBD ##
+## [0.5.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.5.0) - 2018-10-27 ##
 ### Added ###
 * Add better support for use as a must-use plugin in the `mu-plugins` directory.
 
