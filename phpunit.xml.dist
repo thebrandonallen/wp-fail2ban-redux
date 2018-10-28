@@ -16,7 +16,7 @@
 		</blacklist>
 
 		<whitelist>
-			<directory suffix=".php">./classes</directory>
+			<directory suffix=".php">./wp-fail2ban-redux/classes</directory>
 			<file>./wp-fail2ban-redux.php</file>
 		</whitelist>
 	</filter>
