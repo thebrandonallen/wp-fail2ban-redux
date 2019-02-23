@@ -5,19 +5,18 @@
 	beStrictAboutTestsThatDoNotTestAnything="true"
 	>
 	<testsuites>
-		<testsuite>
-			<directory suffix=".php">./tests/includes/</directory>
+		<testsuite name="default">
 			<directory prefix="test-" suffix=".php">./tests/</directory>
+			<file>tests/includes/class-wp-fail2ban-redux-logger-mock.php</file>
 		</testsuite>
 	</testsuites>
 	<filter>
-		<blacklist>
-			<directory suffix=".php">.</directory>
-		</blacklist>
-
-		<whitelist>
+		<whitelist addUncoveredFilesFromWhitelist="true">
 			<directory suffix=".php">./wp-fail2ban-redux/classes</directory>
 			<file>./wp-fail2ban-redux.php</file>
+			<exclude>
+				<directory suffix=".php">.</directory>
+			</exclude>
 		</whitelist>
 	</filter>
 </phpunit>

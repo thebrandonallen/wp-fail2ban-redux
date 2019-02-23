@@ -18,6 +18,7 @@ cache:
     - $HOME/.composer/cache
 
 php:
+  - 7.3
   - 7.2
   - 7.1
   - 7.0
@@ -28,6 +29,8 @@ env:
     - WPF2BR_TRAVISCI=travis:phpunit
   matrix:
     - WP_VERSION=trunk
+    - WP_VERSION=5.1
+    - WP_VERSION=5.0
     - WP_VERSION=4.9
     - WP_VERSION=4.8
     - WP_VERSION=4.7
@@ -39,6 +42,12 @@ matrix:
   include:
     - php: 5.3
       env: WP_VERSION=trunk
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=5.1
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=5.0
       dist: precise
     - php: 5.3
       env: WP_VERSION=4.9
@@ -59,15 +68,15 @@ matrix:
       env: WP_VERSION=trunk WPF2BR_TRAVISCI=travis:codecoverage
     - php: nightly
       env: WP_VERSION=trunk
-    - php: 7.3.0RC1
-      sudo: required
-      dist: xenial
-      services: mysql
-      addons:
-        apt:
-          packages:
-            - libzip4
   exclude:
+    - php: 7.3
+      env: WP_VERSION=4.8
+    - php: 7.3
+      env: WP_VERSION=4.7
+    - php: 7.3
+      env: WP_VERSION=4.6
+    - php: 7.3
+      env: WP_VERSION=4.5
     - php: 7.2
       env: WP_VERSION=4.8
     - php: 7.2
@@ -82,27 +91,7 @@ matrix:
       env: WP_VERSION=4.5
   allow_failures:
     - php: nightly
-    - php: 7.3.0RC1
     - env: WP_VERSION=trunk WPF2BR_TRAVISCI=travis:codecoverage
-
-before_install:
-  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-  - npm --version
-  - node --version
-  - nvm install 8
-  - node --version
-  - npm --version
-  - npm install -g grunt-cli
-  - phpenv versions
-  - mysql --version
-  - php --version
-  - php -m
-  - which phpunit
-  - phpunit --version
-  - curl --version
-  - grunt --version
-  - git --version
-  - svn --version
 
 # Clones WordPress and configures our testing environment.
 before_script:
@@ -121,9 +110,9 @@ before_script:
     fi
   - |
     # Install the specified version of PHPUnit depending on the PHP version:
-    if [[ "$WPF2BR_TRAVISCI" == "travis:phpunit" ]]; then
+    if [[ "$WPF2BR_TRAVISCI" == "travis:phpunit" || "$WPF2BR_TRAVISCI" == "travis:codecoverage" ]]; then
       case "$TRAVIS_PHP_VERSION" in
-        7.3.0RC1|7.2|7.1|7.0|nightly)
+        7.3|7.2|7.1|7.0|nightly)
           echo "Using PHPUnit 6.x"
           travis_retry composer global require "phpunit/phpunit:^6"
           ;;
@@ -137,8 +126,25 @@ before_script:
           ;;
       esac
     fi
+  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  - npm --version
+  - node --version
+  - nvm install 10.13.0
+  - npm install -g grunt-cli
   - npm install
   - npm prune
+  - mysql --version
+  - phpenv versions
+  - php --version
+  - php -m
+  - npm --version
+  - node --version
+  - which phpunit
+  - phpunit --version
+  - curl --version
+  - grunt --version
+  - git --version
+  - svn --version
 
 script: grunt $WPF2BR_TRAVISCI
 
