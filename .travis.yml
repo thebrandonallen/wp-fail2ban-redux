@@ -29,6 +29,7 @@ env:
     - WPF2BR_TRAVISCI=travis:phpunit
   matrix:
     - WP_VERSION=trunk
+    - WP_VERSION=5.2
     - WP_VERSION=5.1
     - WP_VERSION=5.0
     - WP_VERSION=4.9
@@ -40,6 +41,9 @@ matrix:
   include:
     - php: 5.3
       env: WP_VERSION=trunk
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=5.2
       dist: precise
     - php: 5.3
       env: WP_VERSION=5.1
