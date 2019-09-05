@@ -60,7 +60,7 @@ matrix:
     - php: 5.3
       env: WP_VERSION=4.7
       dist: precise
-    - php: 7.1
+    - php: 7.2
       env: WP_VERSION=trunk WPF2BR_TRAVISCI=travis:codecoverage
     - php: nightly
       env: WP_VERSION=trunk
