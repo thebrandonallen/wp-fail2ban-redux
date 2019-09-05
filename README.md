@@ -3,7 +3,7 @@
 **Donate link:** https://brandonallen.me/donate/  
 **Tags:** fail2ban, login, security, syslog  
 **Requires at least:** 4.7  
-**Tested up to:** 4.9.8  
+**Tested up to:** 5.2.3  
 **Requires PHP:** 5.3  
 **Stable tag:** 0.5.0  
 **License:** GPLv2 or later  
