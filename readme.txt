@@ -5,7 +5,7 @@ Tags: fail2ban, login, security, syslog
 Requires at least: 4.7
 Tested up to: 5.2.3
 Requires PHP: 5.3
-Stable tag: 0.5.0
+Stable tag: 0.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -61,6 +61,11 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 As of version 0.5.0, yes! Download the plugin, and unzip. Inside the plugin folder will be another folder named `wp-fail2ban-redux` and `wp-fail2ban-redux.php`. Upload this folder and file to the `mu-plugins` directory of your site.
 
 == Changelog ==
+
+= 0.5.1 =
+* Release date: 2019-09-05
+* **This release requires and update to the `wordpress-hard.conf` file, in order to fix an issue with matches failing for XML-RPC multicall authentication failures. See https://github.com/thebrandonallen/wp-fail2ban-redux/pull/13/commits/2e3a3867749be7839edfae5707b62921c36ecd85**
+* Fix issue where XML-RPC multicall authentication failures weren't correctly matched by Fail2Ban with the `wordpress-hard.conf` filter.
 
 = 0.5.0 =
 * Release date: 2018-10-27
