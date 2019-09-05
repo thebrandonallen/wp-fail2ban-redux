@@ -40,9 +40,6 @@ matrix:
   fast_finish: true
   include:
     - php: 5.3
-      env: WP_VERSION=trunk
-      dist: precise
-    - php: 5.3
       env: WP_VERSION=5.1
       dist: precise
     - php: 5.3
