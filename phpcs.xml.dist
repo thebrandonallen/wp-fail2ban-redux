@@ -1,14 +1,9 @@
 <?xml version="1.0"?>
-<ruleset name="WP Fail2Ban Redux">
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Edit Author Slug" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
 	<description>WP Fail2Ban Redux Custom WordPress Coding Standards</description>
 
-	<!-- Exclude WP Core folders and files from being checked. -->
-	<exclude-pattern>/docroot/wp-admin/*</exclude-pattern>
-	<exclude-pattern>/docroot/wp-includes/*</exclude-pattern>
-	<exclude-pattern>/docroot/wp-*.php</exclude-pattern>
-	<exclude-pattern>/docroot/index.php</exclude-pattern>
-	<exclude-pattern>/docroot/xmlrpc.php</exclude-pattern>
-	<exclude-pattern>/docroot/wp-content/plugins/*</exclude-pattern>
+	<!-- Exclude the code coverage directory. -->
+	<exclude-pattern>/coverage/*</exclude-pattern>
 
 	<!-- Exclude the Composer Vendor directory. -->
 	<exclude-pattern>/vendor/*</exclude-pattern>
@@ -16,31 +11,15 @@
 	<!-- Exclude the Node Modules directory. -->
 	<exclude-pattern>/node_modules/*</exclude-pattern>
 
-	<!-- Exclude minified Javascript files. -->
-	<exclude-pattern>*.min.js</exclude-pattern>
+	<!-- Exclude the build directory. -->
+	<exclude-pattern>/build/*</exclude-pattern>
 
-	<!-- Include the WordPress-Core standard. -->
-	<rule ref="WordPress-Core"/>
+	<!-- Exclude Javascript files. -->
+	<exclude-pattern>*.js</exclude-pattern>
 
 	<!-- Include the WordPress-Extra standard. -->
-	<rule ref="WordPress-Extra">
-		<!--
-		We may want a middle ground though. The best way to do this is add the
-		entire ruleset, then rule by rule, remove ones that don't suit a project.
-		We can do this by running `phpcs` with the '-s' flag, which allows us to
-		see the names of the sniffs reporting errors.
-		Once we know the sniff names, we can opt to exclude sniffs which don't
-		suit our project like so.
-
-		The below two examples just show how you can exclude rules.
-		They are not intended as advice about which sniffs to exclude.
-		-->
-
-		<!--
-		<exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
-		<exclude name="WordPress.Security.EscapeOutput"/>
-		-->
-	</rule>
+	<!-- This also includes the WordPress-Core standard. -->
+	<rule ref="WordPress-Extra"/>
 
 	<!-- Let's also check that everything is properly documented. -->
 	<rule ref="WordPress-Docs"/>
