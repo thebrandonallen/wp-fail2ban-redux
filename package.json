@@ -6,7 +6,7 @@
   "license": "GPL-2.0-or-later",
   "repository": "github:thebrandonallen/wp-fail2ban-redux",
   "devDependencies": {
-    "grunt": "~1.0.4",
+    "grunt": "~1.1.0",
     "grunt-checktextdomain": "~1.0.1",
     "grunt-contrib-clean": "~2.0.0",
     "grunt-contrib-copy": "~1.0.0",
