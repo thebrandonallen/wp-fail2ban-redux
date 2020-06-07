@@ -4,6 +4,7 @@
 /build
 /coverage
 /node_modules
+/vendor/
 npm-debug.log
 phpcs.xml
 phpunit.xml
