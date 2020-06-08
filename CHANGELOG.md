@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
-## [0.6.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.6.0) - TBD
+## [0.6.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.6.0) - 2020-06-07
 ### Changed
 * Bumps the minimum required version to WordPress 4.9.
 * Bumps "Tested up to" version to 5.4.1
