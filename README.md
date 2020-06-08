@@ -62,6 +62,7 @@ As of version 0.5.0, yes! Download the plugin, and unzip. Inside the plugin fold
 
 ### How do you I use this plugin if my site is behind a proxy, like Cloudflare? ###
 You need to add some code to your `wp-config.php` file. See the below links for guidance.
+
 * https://core.trac.wordpress.org/ticket/9235#comment:39
 * https://stackoverflow.com/questions/14985518/cloudflare-and-logging-visitor-ip-addresses-via-in-php/14985633#14985633
 * https://support.cloudflare.com/hc/en-us/articles/200170916#12345680
