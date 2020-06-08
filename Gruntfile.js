@@ -11,6 +11,8 @@ module.exports = function( grunt ) {
 			'!**/coverage/**',
 			'!**/node_modules/**',
 			'!**/tests/**',
+			'!**/vendor/**',
+			'!composer.*',
 			'!Gruntfile.js*',
 			'!package.json*',
 			'!package-lock.json*',
