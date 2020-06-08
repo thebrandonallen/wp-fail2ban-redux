@@ -3,10 +3,11 @@
   "description": "Records various WordPress events to your server's system log for integration with Fail2Ban.",
   "type": "project",
   "require": {
-      "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
-      "phpcompatibility/phpcompatibility-wp": "^2.1",
-      "squizlabs/php_codesniffer": "^3.5",
-      "wp-coding-standards/wpcs": "^2.2"
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "phpunit/phpunit": "^5.7 || ^6.5 || ^7.5",
+    "squizlabs/php_codesniffer": "^3.5",
+    "wp-coding-standards/wpcs": "^2.2"
   },
   "license": "GPL-2.0-or-later",
   "authors": [
