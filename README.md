@@ -2,10 +2,10 @@
 **Contributors:** [thebrandonallen](https://profiles.wordpress.org/thebrandonallen)  
 **Donate link:** https://brandonallen.me/donate/  
 **Tags:** fail2ban, login, security, syslog  
-**Requires at least:** 4.7  
-**Tested up to:** 5.2.3  
-**Requires PHP:** 5.3  
-**Stable tag:** 0.5.1  
+**Requires at least:** 4.9  
+**Tested up to:** 5.4.1  
+**Requires PHP:** 5.6.20  
+**Stable tag:** 0.6.0  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/old-licenses/gpl-2.0.html  
 
