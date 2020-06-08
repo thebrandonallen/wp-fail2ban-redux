@@ -57,9 +57,15 @@ Yes! All of the improvements made in *WP Fail2Ban Redux* were done in a way that
 
 *Be ye forewarned: Future changes to WP fail2ban may break backwards compatibility with WP Fail2Ban Redux filters. No attempts will be made to fix this. So, even though it's not required, it is probably a good idea to update the filters anyway.*
 
-### Can I use this as a must-use plugin in the `mu-plugins` folder?
+### Can I use this as a must-use plugin in the `mu-plugins` folder? ###
 As of version 0.5.0, yes! Download the plugin, and unzip. Inside the plugin folder will be another folder named `wp-fail2ban-redux` and `wp-fail2ban-redux.php`. Upload this folder and file to the `mu-plugins` directory of your site.
-###
+
+### How do you I use this plugin if my site is behind a proxy, like Cloudflare? ###
+You need to add some code to your `wp-config.php` file. See the below links for guidance.
+* https://core.trac.wordpress.org/ticket/9235#comment:39
+* https://stackoverflow.com/questions/14985518/cloudflare-and-logging-visitor-ip-addresses-via-in-php/14985633#14985633
+* https://support.cloudflare.com/hc/en-us/articles/200170916#12345680
+
 ## Changelog ##
 
 ### 0.5.1 ###
