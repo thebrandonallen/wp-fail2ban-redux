@@ -69,6 +69,10 @@ You need to add some code to your `wp-config.php` file. See the below links for 
 
 == Changelog ==
 
+= 0.6.0 =
+* Bumps the minimum required version to WordPress 4.9.
+* Bumps "Tested up to" version to 5.4.1
+
 = 0.5.1 =
 * Release date: 2019-09-05
 * **This release requires and update to the `wordpress-hard.conf` file, in order to fix an issue with matches failing for XML-RPC multicall authentication failures. See https://github.com/thebrandonallen/wp-fail2ban-redux/pull/13/commits/2e3a3867749be7839edfae5707b62921c36ecd85**
