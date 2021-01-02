@@ -2,8 +2,8 @@
   "name": "thebrandonallen/wp-fail2ban-redux",
   "description": "Records various WordPress events to your server's system log for integration with Fail2Ban.",
   "type": "project",
-  "require": {
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
     "phpcompatibility/phpcompatibility-wp": "^2.1",
     "phpunit/phpunit": "^5.7 || ^6.5 || ^7.5",
     "squizlabs/php_codesniffer": "^3.5",
