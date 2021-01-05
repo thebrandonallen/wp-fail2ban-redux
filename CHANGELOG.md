@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
-## [0.7.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.7.0) - TBD
+## [0.7.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.7.0) - 2021-01-05
 ### Changed
 * Bumps "Tested up to" version to 5.6
 * Move Composer dependencies to `require-dev` to reduce the number of packages installed when WP Fail2Ban Redux is installed via composer. See https://github.com/thebrandonallen/wp-fail2ban-redux/pull/17
