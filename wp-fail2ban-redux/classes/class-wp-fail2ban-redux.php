@@ -143,6 +143,10 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 		 * @return WP_User|WP_Error|void
 		 */
 		public function authenticate( $user, $username ) {
+			// Bail if no username is passed.
+			if ( empty( $username ) ) {
+				return $user;
+			}
 
 			/**
 			 * Filters the array of blocked users.
@@ -159,7 +163,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 				/**
 				 * Filters the boolean of blocked users not in.
 				 *
-				 * The default is to block authetication attempts for any
+				 * The default is to block authentication attempts for any
 				 * username in the blocked users array. If you'd rather block
 				 * authentication attempts for users not in the blocked users
 				 * array, return true on this filter.

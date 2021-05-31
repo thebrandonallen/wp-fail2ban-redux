@@ -148,6 +148,29 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Test `WP_Fail2Ban_Redux::authenticate` when no username is passed.
+	 *
+	 * @since 0.8.0
+	 *
+	 * @covers WP_Fail2Ban_Redux::authenticate
+	 */
+	public function test_authenticate_no_username_passed() {
+		// No users are blocked.
+		$this->expectOutputString( '' );
+		$this->assertSame( null, $this->wpf2br->authenticate( null, '' ) );
+
+		// SpongeBob is blocked.
+		add_filter( 'wp_fail2ban_redux_blocked_users', array( $this, 'block_spongebob' ) );
+		add_filter( 'wp_fail2ban_redux_blocked_users_not_in', '__return_true' );
+
+		$this->expectOutputString( '' );
+		$this->assertSame( null, $this->wpf2br->authenticate( null, '' ) );
+
+		remove_filter( 'wp_fail2ban_redux_blocked_users_not_in', '__return_true' );
+		remove_filter( 'wp_fail2ban_redux_blocked_users', array( $this, 'block_spongebob' ) );
+	}
+
+	/**
 	 * Test `WP_Fail2Ban_Redux::authenticate` when there are no blocked users.
 	 *
 	 * @since 0.3.0
