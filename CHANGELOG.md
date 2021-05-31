@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.8.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.8.0) - 2021-05-31
+### Changed
+* Bumps "Tested up to" version to 5.7
+
+### Fixed
+* Fix issue where logging out of WordPress could cause a blocked user log to be recorded
+
 ## [0.7.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.7.0) - 2021-01-05
 ### Changed
 * Bumps "Tested up to" version to 5.6

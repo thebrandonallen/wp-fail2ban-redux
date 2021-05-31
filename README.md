@@ -5,7 +5,7 @@
 **Requires at least:** 4.9  
 **Tested up to:** 5.6  
 **Requires PHP:** 5.6.20  
-**Stable tag:** 0.7.0  
+**Stable tag:** 0.8.0  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/old-licenses/gpl-2.0.html  
 
@@ -69,11 +69,18 @@ You need to add some code to your `wp-config.php` file. See the below links for 
 
 ## Changelog ##
 
+### 0.8.0 ###
+* Release date: 2021-05-31
+* Bumps "Tested up to" version to 5.7
+* Fix issue where logging out of WordPress could cause a blocked user log to be recorded
+
 ### 0.7.0 ###
+* Release date: 2021-01-05
 * Bumps "Tested up to" version to 5.6
 * Move Composer dependencies to `require-dev` to reduce the number of packages installed when WP Fail2Ban Redux is installed via composer. See https://github.com/thebrandonallen/wp-fail2ban-redux/pull/17
 
 ### 0.6.0 ###
+* Release date: 2020-06-07
 * Bumps the minimum required version to WordPress 4.9.
 * Bumps "Tested up to" version to 5.4.1
 
