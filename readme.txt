@@ -5,7 +5,7 @@ Tags: fail2ban, login, security, syslog
 Requires at least: 4.9
 Tested up to: 5.6
 Requires PHP: 5.6.20
-Stable tag: 0.8.0
+Stable tag: 0.8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -68,6 +68,10 @@ You need to add some code to your `wp-config.php` file. See the below links for 
 * https://support.cloudflare.com/hc/en-us/articles/200170916#12345680
 
 == Changelog ==
+
+= 0.8.1 =
+* Release date: 2021-06-01
+* Actually bumps "Tested up to" version to 5.7
 
 = 0.8.0 =
 * Release date: 2021-05-31

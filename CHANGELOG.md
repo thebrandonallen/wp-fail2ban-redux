@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.8.1](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.8.1) - 2021-06-01
+### Changed
+* Actually bumps "Tested up to" version to 5.7
+
 ## [0.8.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.8.0) - 2021-05-31
 ### Changed
 * Bumps "Tested up to" version to 5.7
