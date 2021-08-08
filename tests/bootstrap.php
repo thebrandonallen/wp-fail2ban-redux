@@ -1,36 +1,33 @@
 <?php
 /**
- * PHPUnit bootstrap file
+ * Bootstrap the plugin unit testing environment.
  *
- * @package WP_Fail2Ban_Redux
- * @subpackage Tests
+ * @package WordPress
+ * @subpackage WP_Fail2Ban_Redux
  */
 
-// Support for:
-// 1. `WP_DEVELOP_DIR` environment variable.
-// 2. Plugin installed inside of WordPress.org developer checkout.
-// 3. WordPress.org developer checked out to /tmp.
-// 4. Tests checked out to /tmp.
-if ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
-	$_tests_dir = getenv( 'WP_DEVELOP_DIR' ) . '/tests/phpunit';
-} elseif ( file_exists( '../../../../tests/phpunit/includes/bootstrap.php' ) ) {
-	$_tests_dir = '../../../../tests/phpunit';
-} elseif ( file_exists( '/tmp/wordpress/tests/phpunit/includes/bootstrap.php' ) ) {
-	$_tests_dir = '/tmp/wordpress/tests/phpunit';
-} elseif ( file_exists( '/tmp/wordpress-tests-lib/includes/bootstrap.php' ) ) {
-	$_tests_dir = '/tmp/wordpress-tests-lib';
+if ( defined( 'WP_FAIL2BAN_REDUX_WP_ENV_TESTS' ) ) {
+	// wp-env setup.
+	define( 'WP_TESTS_CONFIG_FILE_PATH', dirname( __FILE__ ) . '/assets/phpunit-wp-config.php' );
+	define( 'WP_TESTS_CONFIG_PATH', WP_TESTS_CONFIG_FILE_PATH );
+	// Use WP PHPUnit.
+	require_once dirname( dirname( __FILE__ ) ) . '/vendor/wp-phpunit/wp-phpunit/__loaded.php';
 }
 
-// Give access to tests_add_filter() function.
-require_once $_tests_dir . '/includes/functions.php';
+require dirname( __FILE__ ) . '/includes/define-constants.php';
+
+if ( ! file_exists( WP_TESTS_DIR . '/includes/functions.php' ) ) {
+	die( "The WordPress PHPUnit test suite could not be found.\n" );
+}
+
+require_once WP_TESTS_DIR . '/includes/functions.php';
 
 /**
  * Manually load the plugin being tested.
  */
 function _manually_load_plugin() {
-	require dirname( dirname( __FILE__ ) ) . '/wp-fail2ban-redux.php';
+	require WP_FAIL2BAN_REDUX_TESTS_DIR . '/includes/loader.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 
-// Start up the WP testing environment.
-require $_tests_dir . '/includes/bootstrap.php';
+require WP_TESTS_DIR . '/includes/bootstrap.php';

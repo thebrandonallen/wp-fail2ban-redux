@@ -6,6 +6,7 @@
   "license": "GPL-2.0-or-later",
   "repository": "github:thebrandonallen/wp-fail2ban-redux",
   "devDependencies": {
+    "@wordpress/env": "^4.1.0",
     "grunt": "~1.4.1",
     "grunt-checktextdomain": "~1.0.1",
     "grunt-contrib-clean": "~2.0.0",
@@ -17,6 +18,8 @@
   },
   "scripts": {
     "grunt": "grunt",
-    "version": "npm --no-git-tag-version version"
+    "version": "npm --no-git-tag-version version",
+    "wp-env": "wp-env",
+    "test-php": "npm run wp-env run phpunit 'php /var/www/html/wp-content/plugins/wp-fail2ban-redux/vendor/phpunit/phpunit/phpunit -c /var/www/html/wp-content/plugins/wp-fail2ban-redux/tests/env.xml'"
   }
 }
