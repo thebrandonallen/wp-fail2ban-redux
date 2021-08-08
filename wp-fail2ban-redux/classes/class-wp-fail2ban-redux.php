@@ -333,6 +333,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux' ) ) {
 			}
 
 			// Bail if we don't have an `author` or `author_name` request var.
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			if ( ! isset( $_GET['author'] ) && ! isset( $_GET['author_name'] ) ) {
 				return;
 			}

@@ -19,15 +19,19 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->spongebob_id = $this->factory->user->create( array(
-			'user_login' => 'spongebob',
-			'user_email' => 'spongebob@example.com',
-		) );
+		$this->spongebob_id = $this->factory->user->create(
+			array(
+				'user_login' => 'spongebob',
+				'user_email' => 'spongebob@example.com',
+			)
+		);
 
-		$this->squidward_id = $this->factory->user->create( array(
-			'user_login' => 'squidward',
-			'user_email' => 'squidward@example.com',
-		) );
+		$this->squidward_id = $this->factory->user->create(
+			array(
+				'user_login' => 'squidward',
+				'user_email' => 'squidward@example.com',
+			)
+		);
 
 		// Get the WP Fail2Ban Redux instance.
 		$this->wpf2br = WP_Fail2Ban_Redux::get_instance();
@@ -41,11 +45,9 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 	 *
 	 * @since 0.3.0
 	 *
-	 * @param array $blocked The blocked users array.
-	 *
 	 * @return array
 	 */
-	public function block_spongebob( $blocked = array() ) {
+	public function block_spongebob() {
 		return array( 'spongebob' );
 	}
 
@@ -54,11 +56,9 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 	 *
 	 * @since 0.3.0
 	 *
-	 * @param array $blocked The blocked users array.
-	 *
 	 * @return array
 	 */
-	public function block_squidward( $blocked = array() ) {
+	public function block_squidward() {
 		return array( 'squidward' );
 	}
 
@@ -305,7 +305,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 	 */
 	public function test_xmlrpc_pingback_error() {
 
-		$error = new stdClass();
+		$error       = new stdClass();
 		$error->code = 0;
 
 		$expected = "openlog:xmlrpc_pingback_error:syslog:Pingback error {$error->code} generated";
@@ -322,7 +322,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 	 */
 	public function test_xmlrpc_pingback_error_pingback_exists() {
 
-		$error = new stdClass();
+		$error       = new stdClass();
 		$error->code = 48;
 
 		$this->expectOutputString( '' );
@@ -341,8 +341,8 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 		add_filter( 'wp_fail2ban_redux_log_spam_comments', '__return_true' );
 
 		// Fake a comment, and cache it so `get_comment()` can find it.
-		$comment = new stdClass();
-		$comment->ID = 20030527;
+		$comment         = new stdClass();
+		$comment->ID     = 20030527;
 		$comment->status = 'spam';
 		wp_cache_add( $comment->ID, $comment, 'comment' );
 
@@ -580,7 +580,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 		$wp_xmlrpc_server->message->params = array(
 			1 => 'http://spongebob.example.com',
 		);
-		$GLOBALS['wp_xmlrpc_server'] = $wp_xmlrpc_server;
+		$GLOBALS['wp_xmlrpc_server']       = $wp_xmlrpc_server;
 
 		add_filter( 'wp_fail2ban_redux_log_pingbacks', '__return_true' );
 

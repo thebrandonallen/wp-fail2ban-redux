@@ -52,5 +52,5 @@ interface WP_Fail2Ban_Redux_Logger_Interface {
 	 *
 	 * @return void
 	 */
-	public function _exit( $action = '' );
+	public function _exit( $action = '' ); // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 }

@@ -74,7 +74,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Log' ) ) {
 		 *
 		 * @param string $action The logging action.
 		 */
-		public static function _exit( $action = '' ) {
+		public static function _exit( $action = '' ) { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 			_deprecated_function( __METHOD__, '0.3.0', 'WP_Fail2Ban_Redux_Logger::_exit()' );
 			$logger = WP_Fail2Ban_Redux::get_instance()->get_logger();
 			$logger->_exit( $action );

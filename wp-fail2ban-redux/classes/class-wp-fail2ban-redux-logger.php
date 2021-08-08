@@ -46,9 +46,21 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 			// Setup the initial `$ident` value.
 			$ident = "wp({$_SERVER['HTTP_HOST']})";
 
-			/* Deprecated. Do not use. */
-			/* See https://github.com/thebrandonallen/wp-fail2ban-redux/issues/7 */
-			$ident = apply_filters( 'wp_fail2ban_redux_openlog_indent', $ident, $action );
+			/**
+			 * Filters the $ident parameter, which will be the `[DAEMON]`
+			 * portion of the example in the class PHPDoc, and will be passed to
+			 * `openlog()`.
+			 *
+			 * @see https://secure.php.net/manual/function.openlog.php
+			 *
+			 * @since 0.1.0
+			 *
+			 * @deprecated 0.4.0 See https://github.com/thebrandonallen/wp-fail2ban-redux/issues/7
+			 *
+			 * @param string $ident  The syslog tag.
+			 * @param string $action The logging action.
+			 */
+			$ident = apply_filters_deprecated( 'wp_fail2ban_redux_openlog_indent', array( $ident, $action ), '0.4.0', 'wp_fail2ban_redux_openlog_ident' );
 
 			/**
 			 * Filters the $ident parameter, which will be the `[DAEMON]`
@@ -142,7 +154,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 		 *
 		 * @param string $action The logging action.
 		 */
-		public function _exit( $action = '' ) {
+		public function _exit( $action = '' ) { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 
 			/**
 			 * Fires before the script is exited and a 403 status is returned.
@@ -197,7 +209,7 @@ if ( ! class_exists( 'WP_Fail2Ban_Redux_Logger' ) ) {
 				$action
 			);
 
-			wp_die( esc_html( $message ), esc_html( $title ), $args ); // WPCS: XSS okay ($args).
+			wp_die( esc_html( $message ), esc_html( $title ), $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		/**
