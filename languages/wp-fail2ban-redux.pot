@@ -1,37 +1,42 @@
-# Copyright (C) 2021 Brandon Allen
+# Copyright (C) 2016-2021 Brandon Allen
 # This file is distributed under the same license as the WP Fail2Ban Redux package.
+# Submit translations to https://translate.wordpress.org/projects/wp-plugins/wp-fail2ban-redux.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Fail2Ban Redux 0.8.1\n"
-"Report-Msgid-Bugs-To: "
-"https://github.com/thebrandonallen/wp-fail2ban-redux/issues\n"
-"POT-Creation-Date: 2021-06-01 05:34:46+00:00\n"
+"Project-Id-Version: WP Fail2Ban Redux 0.8.2\n"
+"Report-Msgid-Bugs-To: https://github.com/thebrandonallen/wp-fail2ban-redux/issues\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2021-MO-DA HO:MI+ZONE\n"
-"Last-Translator: BRANDON ALLEN <plugins@brandonallen.me>\n"
-"Language-Team: ENGLISH <plugins@brandonallen.me>\n"
-"Language: en_US\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Country: United States\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: "
-"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
-"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-Bookmarks: \n"
-"X-Textdomain-Support: yes\n"
-"X-Generator: grunt-wp-i18n 1.0.3\n"
+"POT-Creation-Date: 2021-08-08T07:38:44+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0\n"
+"X-Poedit-KeywordsList: __:1,2d;_e:1,2d;_x:1,2c,3d;_n:1,2,4d;_ex:1,2c,3d;_nx:1,2,4c,5d;esc_attr__:1,2d;esc_attr_e:1,2d;esc_attr_x:1,2c,3d;esc_html__:1,2d;esc_html_e:1,2d;esc_html_x:1,2c,3d;_n_noop:1,2,3d;_nx_noop:1,2,3c,4d\n"
+"X-Domain: wp-fail2ban-redux\n"
 
-#: wp-fail2ban-redux/classes/class-wp-fail2ban-redux-logger.php:166
-#: wp-fail2ban-redux/classes/class-wp-fail2ban-redux-logger.php:180
-msgid "Forbidden."
+#. Plugin Name of the plugin
+msgid "WP Fail2Ban Redux"
 msgstr ""
 
-#. Description of the plugin/theme
-msgid ""
-"Records various WordPress events to your server's system log for "
-"integration with Fail2Ban."
+#. Plugin URI of the plugin
+msgid "https://github.com/thebrandonallen/wp-fail2ban-redux/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Records various WordPress events to your server's system log for integration with Fail2Ban."
+msgstr ""
+
+#. Author of the plugin
+msgid "Brandon Allen"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/thebrandonallen"
+msgstr ""
+
+#: wp-fail2ban-redux/classes/class-wp-fail2ban-redux-logger.php:178
+#: wp-fail2ban-redux/classes/class-wp-fail2ban-redux-logger.php:192
+msgid "Forbidden."
 msgstr ""

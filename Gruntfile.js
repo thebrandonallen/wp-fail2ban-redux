@@ -18,7 +18,8 @@ module.exports = function( grunt ) {
 			'!package-lock.json*',
 			'!phpcs.xml*',
 			'!phpunit.xml*',
-			'!.*'
+			'!.*',
+			'!.*/**',
 		];
 
 	// Load tasks.
@@ -173,10 +174,66 @@ module.exports = function( grunt ) {
 		}
 	} );
 
+	grunt.registerTask(
+		'i18n:build',
+		'Runs the WP-CLI i18n command to generate the pot file.',
+		function () {
+			const banner = grunt.template.process(
+				'Copyright (C) 2016-<%= grunt.template.today("UTC:yyyy") %> Brandon Allen\n' +
+					'This file is distributed under the same license as the WP Fail2Ban Redux package.\n' +
+					'Submit translations to https://translate.wordpress.org/projects/wp-plugins/wp-fail2ban-redux.'
+			);
+			const keywords = [
+				'__:1,2d',
+				'_e:1,2d',
+				'_x:1,2c,3d',
+				'_n:1,2,4d',
+				'_ex:1,2c,3d',
+				'_nx:1,2,4c,5d',
+				'esc_attr__:1,2d',
+				'esc_attr_e:1,2d',
+				'esc_attr_x:1,2c,3d',
+				'esc_html__:1,2d',
+				'esc_html_e:1,2d',
+				'esc_html_x:1,2c,3d',
+				'_n_noop:1,2,3d',
+				'_nx_noop:1,2,3c,4d',
+			];
+			const headers = {
+				'Report-Msgid-Bugs-To':
+					'https://github.com/thebrandonallen/wp-fail2ban-redux/issues',
+				'X-Poedit-KeywordsList': `${ keywords.join( ';' ) }`,
+			};
+			grunt.util.spawn(
+				{
+					cmd: 'wp',
+					args: [
+						'i18n',
+						'make-pot',
+						'.',
+						'languages/wp-fail2ban-redux.pot',
+						`--headers=${ JSON.stringify( headers ) }`,
+						`--file-comment=${ banner }`,
+						'--exclude=build',
+					],
+					opts: { stdio: 'inherit' },
+				},
+				this.async()
+			);
+		}
+	);
+
 	// Register custom tasks.
 	grunt.registerTask( 'i18n',   ['checktextdomain', 'makepot'] );
 	grunt.registerTask( 'readme', ['wp_readme_to_markdown'] );
-	grunt.registerTask( 'build',  ['clean:all', 'string-replace:build', 'readme', 'i18n', 'copy:files'] );
+	grunt.registerTask( 'build',  [
+		'clean:all',
+		'checktextdomain',
+		'string-replace:build',
+		'readme',
+		'i18n:build',
+		'copy:files'
+	] );
 
 	// PHPUnit test task.
 	grunt.registerMultiTask( 'phpunit', 'Runs PHPUnit tests, including the multisite tests.', function() {

@@ -5,7 +5,7 @@
 **Requires at least:** 4.9  
 **Tested up to:** 5.8  
 **Requires PHP:** 5.6.20  
-**Stable tag:** 0.8.1  
+**Stable tag:** 0.8.2  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/old-licenses/gpl-2.0.html  
 
@@ -70,8 +70,9 @@ You need to add some code to your `wp-config.php` file. See the below links for 
 ## Changelog ##
 
 ### 0.8.2 ###
-* Release date: TBD
+* Release date: 2021-08-08
 * Bumps "Tested up to" version to 5.8
+* No changes to jail or filters in the release.
 
 ### 0.8.1 ###
 * Release date: 2021-06-01
