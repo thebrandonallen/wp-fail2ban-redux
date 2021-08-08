@@ -1,13 +1,17 @@
 <?php
 /**
- * Plugin Name:     WP Fail2Ban Redux
- * Plugin URI:      https://github.com/thebrandonallen/wp-fail2ban-redux/
- * Description:     Records various WordPress events to your server's system log for integration with Fail2Ban.
- * Author:          Brandon Allen
- * Author URI:      https://github.com/thebrandonallen
- * Text Domain:     wp-fail2ban-redux
- * Domain Path:     /languages
- * Version:         0.8.1
+ * Plugin Name:       WP Fail2Ban Redux
+ * Plugin URI:        https://github.com/thebrandonallen/wp-fail2ban-redux/
+ * Description:       Records various WordPress events to your server's system log for integration with Fail2Ban.
+ * Author:            Brandon Allen
+ * Author URI:        https://github.com/thebrandonallen
+ * Text Domain:       wp-fail2ban-redux
+ * Domain Path:       /languages
+ * Version:           0.8.1
+ * Requires at least: 4.9
+ * Requires PHP:      5.8
+ * License:           GPLv2 or later
+ * License URI:       https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * Copyright (C) 2012-2016  Charles Lecklider (email : wordpress@charles.lecklider.org)
  * Copyright (C) 2016-2021  Brandon Allen (https://github.com/thebrandonallen)
