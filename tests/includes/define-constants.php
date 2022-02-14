@@ -1,7 +1,8 @@
 <?php
-
 /**
  * Define constants needed by test suite.
+ *
+ * @package WP_Fail2Ban_Redux
  */
 
 define( 'WP_FAIL2BAN_REDUX_PLUGIN_DIR', dirname( dirname( dirname( __FILE__ ) ) ) );
@@ -27,7 +28,7 @@ if ( false !== getenv( 'WP_PHPUNIT__DIR' ) && defined( 'WP_FAIL2BAN_REDUX_USE_WP
 	define( 'WP_TESTS_DIR', getenv( 'WP_TESTS_DIR' ) );
 	define( 'WP_ROOT_DIR', WP_TESTS_DIR );
 } else {
-	// Support WP_DEVELOP_DIR, as used by some plugins
+	// Support WP_DEVELOP_DIR, as used by some plugins.
 	if ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
 		define( 'WP_ROOT_DIR', getenv( 'WP_DEVELOP_DIR' ) );
 	} else {
@@ -38,18 +39,18 @@ if ( false !== getenv( 'WP_PHPUNIT__DIR' ) && defined( 'WP_FAIL2BAN_REDUX_USE_WP
 }
 
 if ( ! defined( 'WP_TESTS_CONFIG_FILE_PATH' ) ) {
-	// Based on the tests directory, look for a config file
+	// Based on the tests directory, look for a config file.
 	if ( file_exists( WP_ROOT_DIR . '/wp-tests-config.php' ) ) {
-		// Standard develop.svn.wordpress.org setup
+		// Standard develop.svn.wordpress.org setup.
 		define( 'WP_TESTS_CONFIG_PATH', WP_ROOT_DIR . '/wp-tests-config.php' );
 
 	} elseif ( file_exists( WP_TESTS_DIR . '/wp-tests-config.php' ) ) {
-		// Legacy unit-test.svn.wordpress.org setup
+		// Legacy unit-test.svn.wordpress.org setup.
 		define( 'WP_TESTS_CONFIG_PATH', WP_TESTS_DIR . '/wp-tests-config.php' );
 
 	} elseif ( file_exists( dirname( dirname( WP_TESTS_DIR ) ) . '/wp-tests-config.php' ) ) {
 		// Environment variable exists and points to tests/phpunit of
-		// develop.svn.wordpress.org setup
+		// develop.svn.wordpress.org setup.
 		define( 'WP_TESTS_CONFIG_PATH', dirname( dirname( WP_TESTS_DIR ) ) . '/wp-tests-config.php' );
 
 	} else {

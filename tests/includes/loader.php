@@ -2,6 +2,7 @@
 
 require_once dirname( __FILE__ ) . '/define-constants.php';
 
+// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.system_calls_system
 system( WP_PHP_BINARY . ' ' . escapeshellarg( dirname( __FILE__ ) . '/install.php' ) . ' ' . escapeshellarg( WP_TESTS_CONFIG_PATH ) . ' ' . escapeshellarg( WP_TESTS_DIR ) );
 
 // Bootstrap WP Fail2Ban Redux.

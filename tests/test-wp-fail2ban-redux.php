@@ -465,7 +465,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 
 		$_GET['author'] = '1';
 
-		$hook                   = parse_url( 'index.php' );
+		$hook                   = wp_parse_url( 'index.php' );
 		$GLOBALS['hook_suffix'] = $hook['path'];
 		set_current_screen();
 
