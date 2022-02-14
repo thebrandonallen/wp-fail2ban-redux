@@ -69,6 +69,11 @@ You need to add some code to your `wp-config.php` file. See the below links for 
 
 == Changelog ==
 
+= 0.8.3 =
+* Release date: TBD
+* Bumps "Tested up to" version to 5.9
+* No changes to jail or filters in the release.
+
 = 0.8.2 =
 * Release date: 2021-08-08
 * Bumps "Tested up to" version to 5.8
