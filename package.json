@@ -20,6 +20,6 @@
     "grunt": "grunt",
     "version": "npm --no-git-tag-version version",
     "wp-env": "wp-env",
-    "test-php": "npm run wp-env run phpunit 'php /var/www/html/wp-content/plugins/wp-fail2ban-redux/vendor/phpunit/phpunit/phpunit -c /var/www/html/wp-content/plugins/wp-fail2ban-redux/tests/env.xml'"
+    "test-php": "npm run wp-env clean all && npm run wp-env destroy && npm run wp-env run phpunit 'php /var/www/html/wp-content/plugins/wp-fail2ban-redux/vendor/phpunit/phpunit/phpunit -c /var/www/html/wp-content/plugins/wp-fail2ban-redux/tests/env.xml'"
   }
 }
