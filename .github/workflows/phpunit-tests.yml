@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.2', '7.4', '8.0', '8.1', '8.2']
+        php: ['7.2', '7.4', '8.0', '8.1']
         wp_version: ['5.9', '6.0', '6.1', '6.2', 'master']
         include:
           - php: '7.2'
@@ -32,6 +32,12 @@ jobs:
             wp_version: '5.8'
           - php: '8.0'
             wp_version: '5.8'
+          - php: '8.2'
+            wp_version: '6.1'
+          - php: '8.2'
+            wp_version: '6.2'
+          - php: '8.2'
+            wp_version: 'master'
     env:
       WP_ENV_PHP_VERSION: ${{ matrix.php }}
       WP_VERSION: ${{ matrix.wp_version }}
@@ -101,8 +107,6 @@ jobs:
           npm run wp-env start -- --update
 
       - name: Running single site unit tests
-        # Allow PHP 8.2 test to
-        continue-on-error: ${{ matrix.php == '8.2' }}
         run: npm run test-php
         if: ${{ success() || failure() }}
 
