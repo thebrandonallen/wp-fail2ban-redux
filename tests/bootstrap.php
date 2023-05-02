@@ -6,6 +6,8 @@
  * @subpackage WP_Fail2Ban_Redux
  */
 
+require_once dirname( dirname( __FILE__ ) ) . '/vendor/yoast/phpunit-polyfills/phpunitpolyfills-autoload.php';
+
 if ( defined( 'WP_FAIL2BAN_REDUX_WP_ENV_TESTS' ) ) {
 	// wp-env setup.
 	define( 'WP_TESTS_CONFIG_FILE_PATH', dirname( __FILE__ ) . '/assets/phpunit-wp-config.php' );

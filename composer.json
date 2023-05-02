@@ -26,6 +26,10 @@
   "prefer-stable": true,
   "config": {
     "discard-changes": true,
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/installers": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }
