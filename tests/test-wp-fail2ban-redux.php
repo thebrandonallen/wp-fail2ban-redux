@@ -16,7 +16,7 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 	 *
 	 * @since 0.3.0
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->spongebob_id = $this->factory->user->create(
