@@ -68,12 +68,6 @@ module.exports = function( grunt ) {
 				}]
 			}
 		},
-		jshint: {
-			options: grunt.file.readJSON( '.jshintrc' ),
-			grunt: {
-				src: ['Gruntfile.js']
-			}
-		},
 		makepot: {
 			target: {
 				options: {
