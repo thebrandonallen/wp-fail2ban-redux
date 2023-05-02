@@ -10,6 +10,9 @@
  * WP_Fail2Ban_Redux tests.
  */
 class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
+	public $spongebob_id;
+	public $squidward_id;
+	public $wpf2br;
 
 	/**
 	 * The setUp method.
