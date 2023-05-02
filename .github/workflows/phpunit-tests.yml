@@ -21,11 +21,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.4', '8.0']
-        wp_version: ['5.8', '5.9', 'master']
+        php: ['7.2', '7.4', '8.0', '8.1', '8.2']
+        wp_version: ['5.9', '6.0', '6.1', '6.2', 'master']
         include:
-          - php: '5.6'
+          - php: '7.2'
             wp_version: '5.1'
+          - php: '7.2'
+            wp_version: '5.8'
+          - php: '7.4'
+            wp_version: '5.8'
+          - php: '8.0'
+            wp_version: '5.8'
     env:
       WP_ENV_PHP_VERSION: ${{ matrix.php }}
       WP_VERSION: ${{ matrix.wp_version }}
@@ -65,7 +71,7 @@ jobs:
           composer-options: "--ignore-platform-reqs"
 
       - name: Adjust phpunit/wp-phpunit version
-        run: if [ ${{ env.WP_VERSION }} == '5.1' ]; then composer require --dev --with-all-dependencies "wp-phpunit/wp-phpunit:5.1.*" "phpunit/phpunit:^5"; fi
+        run: if [ ${{ env.WP_VERSION }} == '5.1' ]; then composer require --dev --with-all-dependencies "wp-phpunit/wp-phpunit:5.1.*" "phpunit/phpunit:^6"; fi
 
       - name: Cache node modules
         uses: actions/cache@v2
