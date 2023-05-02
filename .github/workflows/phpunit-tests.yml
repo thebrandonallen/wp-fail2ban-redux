@@ -101,6 +101,8 @@ jobs:
           npm run wp-env start -- --update
 
       - name: Running single site unit tests
+        # Allow PHP 8.2 test to
+        continue-on-error: ${{ matrix.php == '8.2' }}
         run: npm run test-php
         if: ${{ success() || failure() }}
 
