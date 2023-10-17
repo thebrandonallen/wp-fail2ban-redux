@@ -5,7 +5,7 @@
 **Requires at least:** 5.5  
 **Tested up to:** 6.4  
 **Requires PHP:** 7.0  
-**Stable tag:** 0.9.0  
+**Stable tag:** 0.9.1  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/old-licenses/gpl-2.0.html  
 
@@ -69,7 +69,7 @@ You need to add some code to your `wp-config.php` file. See the below links for 
 
 ## Changelog ##
 
-### 0.9.0 ###
+### 0.9.1 ###
 * Release date: 2023-10-17
 * Bumps "Tested up to" version to 6.4
 * Bumps minimum required PHP version to 7.0

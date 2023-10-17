@@ -1,6 +1,6 @@
 {
   "name": "wp-fail2ban-redux",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "main": "Gruntfile.js",
   "author": "Brandon Allen",
   "license": "GPL-2.0-or-later",
