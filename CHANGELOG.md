@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
-## [0.9.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.9.0) - TBD
+## [0.9.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.9.0) - 2023-10-17
 ### Changed
 * Bumps "Tested up to" version to 6.4
 * Bumps minimum required PHP version to 7.0
