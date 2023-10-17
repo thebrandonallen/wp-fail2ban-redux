@@ -2,9 +2,9 @@
 **Contributors:** [thebrandonallen](https://profiles.wordpress.org/thebrandonallen/)  
 **Donate link:** https://brandonallen.me/donate/  
 **Tags:** fail2ban, login, security, syslog  
-**Requires at least:** 4.9  
-**Tested up to:** 5.9  
-**Requires PHP:** 5.6.20  
+**Requires at least:** 5.5  
+**Tested up to:** 6.4  
+**Requires PHP:** 7.0  
 **Stable tag:** 0.8.2  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/old-licenses/gpl-2.0.html  
@@ -68,6 +68,14 @@ You need to add some code to your `wp-config.php` file. See the below links for 
 * https://support.cloudflare.com/hc/en-us/articles/200170916#12345680
 
 ## Changelog ##
+
+### 0.9.0 ###
+* Release date: TBD
+* Bumps "Tested up to" version to 6.4
+* Bumps minimum required PHP version to 7.0
+* Bumps minimum required WP version to 5.5
+* Update dependency package versions
+* No changes to jail or filters in the release.
 
 ### 0.8.3 ###
 * Release date: TBD

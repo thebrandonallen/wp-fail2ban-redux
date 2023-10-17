@@ -5,9 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
-## [0.8.3](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.8.3) - TBD
+## [0.9.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.9.0) - TBD
 ### Changed
-* Bumps "Tested up to" version to 5.9
+* Bumps "Tested up to" version to 6.4
+* Bumps minimum required PHP version to 7.0
+* Bumps minimum required WP version to 5.5
+* Update dependency package versions
 * No changes to jail or filters in the release.
 
 ## [0.8.2](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.8.2) - 2021-08-08
