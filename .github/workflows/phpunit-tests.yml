@@ -21,26 +21,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.2', '7.4', '8.0', '8.1']
-        wp_version: ['5.9', '6.0', '6.1', '6.2', '6.3', 'master']
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3']
+        wp_version: ['5.9', '6.0', '6.1', '6.2', '6.3', '6.4', '6.5', '6.6', 'master']
         include:
           - php: '7.2'
-            wp_version: '5.1'
-          - php: '7.2'
-            wp_version: '5.8'
+            wp_version: '5.4'
+          - php: '7.4'
+            wp_version: '5.5'
           - php: '7.4'
             wp_version: '5.8'
-          - php: '8.0'
-            wp_version: '5.8'
-          - php: '8.2'
-            wp_version: '6.1'
-          - php: '8.2'
-            wp_version: '6.2'
-          - php: '8.2'
-            wp_version: 'master'
     env:
       WP_ENV_PHP_VERSION: ${{ matrix.php }}
       WP_VERSION: ${{ matrix.wp_version }}
+      WP_PHPUNIT_DEFAULT_VERSION: '6.6'
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Cancel previous runs of this workflow
@@ -77,7 +70,14 @@ jobs:
           composer-options: "--ignore-platform-reqs"
 
       - name: Adjust phpunit/wp-phpunit version
-        run: if [ ${{ env.WP_VERSION }} == '5.1' ]; then composer require --dev --with-all-dependencies "wp-phpunit/wp-phpunit:5.1.*" "phpunit/phpunit:^6"; fi
+        run: |
+          if [[ '${{ env.WP_VERSION }}' == 'master' ]]; then
+            composer require --dev --with-all-dependencies "wp-phpunit/wp-phpunit:${{ env.WP_PHPUNIT_DEFAULT_VERSION }}.*";
+          elif (( $(echo "${{ env.WP_VERSION }} < 5.9" | bc -l) )); then
+            composer require --dev --with-all-dependencies "wp-phpunit/wp-phpunit:${{ env.WP_VERSION }}.*" "phpunit/phpunit:^7";
+          else
+            composer require --dev --with-all-dependencies "wp-phpunit/wp-phpunit:${{ env.WP_VERSION }}.*";
+          fi
 
       - name: Cache node modules
         uses: actions/cache@v2
