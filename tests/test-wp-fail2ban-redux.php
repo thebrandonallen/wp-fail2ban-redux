@@ -349,8 +349,11 @@ class WP_Fail2Ban_Redux_Tests extends WP_UnitTestCase {
 		$comment->status = 'spam';
 		wp_cache_add( $comment->ID, $comment, 'comment' );
 
-		$expected = 'openlog:comment_spam:syslog:Spammed comment';
-		$this->expectOutputString( $expected );
+		// TODO: Switch back to expectOutputString when PHP 8.2+ support has been improved.
+		// $expected = 'openlog:comment_spam:syslog:Spammed comment';
+		// $this->expectOutputString( $expected );
+		$expected = '/openlog:comment_spam:syslog:Spammed comment$/';
+		$this->expectOutputRegex( $expected );
 		$this->wpf2br->comment_spam( $comment->ID, $comment->status );
 
 		wp_cache_delete( $comment->ID, 'comment' );
