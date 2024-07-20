@@ -12,7 +12,7 @@
     "phpunit/phpunit": "^8.0",
     "squizlabs/php_codesniffer": "^3.7",
     "wp-coding-standards/wpcs": "^2.3",
-    "wp-phpunit/wp-phpunit": "^5.9.7",
+    "wp-phpunit/wp-phpunit": "^6.6",
     "yoast/phpunit-polyfills": "^1.1"
   },
   "license": "GPL-2.0-or-later",
@@ -31,5 +31,8 @@
       "composer/installers": true,
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
+  },
+  "scripts": {
+    "test": "@php ./vendor/phpunit/phpunit/phpunit"
   }
 }
