@@ -1,29 +1,34 @@
 /* jshint node:true */
 module.exports = function( grunt ) {
 
-	var SOURCE_DIR = '',
-		BUILD_DIR = 'build/',
+	const SOURCE_DIR = '';
+	const BUILD_DIR = 'build/';
 
-		WPF2BR_EXCLUDED_MISC = [
-			'!**/assets/**',
-			'!**/bin/**',
-			'!**/build/**',
-			'!**/coverage/**',
-			'!**/node_modules/**',
-			'!**/tests/**',
-			'!**/vendor/**',
-			'!composer.*',
-			'!Gruntfile.js*',
-			'!package.json*',
-			'!package-lock.json*',
-			'!phpcs.xml*',
-			'!phpunit.xml*',
-			'!.*',
-			'!.*/**',
-		];
+	const WPF2BR_EXCLUDED_MISC = [
+		'!**/assets/**',
+		'!**/bin/**',
+		'!**/build/**',
+		'!**/coverage/**',
+		'!**/node_modules/**',
+		'!**/tests/**',
+		'!**/vendor/**',
+		'!composer.*',
+		'!Gruntfile.js*',
+		'!package.json*',
+		'!package-lock.json*',
+		'!phpcs.xml*',
+		'!phpunit.xml*',
+		'!.*',
+		'!.*/**',
+	];
 
 	// Load tasks.
-	require( 'matchdep' ).filterDev(['grunt-*', '!grunt-legacy-util']).forEach( grunt.loadNpmTasks );
+    grunt.loadNpmTasks( 'grunt-checktextdomain' );
+    grunt.loadNpmTasks( 'grunt-contrib-clean' );
+    grunt.loadNpmTasks( 'grunt-contrib-copy' );
+    grunt.loadNpmTasks( 'grunt-string-replace' );
+    grunt.loadNpmTasks( 'grunt-wp-i18n' );
+    grunt.loadNpmTasks( 'grunt-wp-readme-to-markdown' );
 
 	// Project configuration
 	grunt.initConfig( {
@@ -85,13 +90,14 @@ module.exports = function( grunt ) {
 						pot.headers['last-translator']      = 'BRANDON ALLEN <plugins@brandonallen.me>';
 						pot.headers['language-team']        = 'ENGLISH <plugins@brandonallen.me>';
 						pot.headers['language']             = 'en_US';
-						var translation, // Exclude meta data from pot.
-							excluded_meta = [
-								'Plugin Name of the plugin/theme',
-								'Plugin URI of the plugin/theme',
-								'Author of the plugin/theme',
-								'Author URI of the plugin/theme'
-							];
+						let translation;
+						// Exclude meta data from pot.
+						const excluded_meta = [
+							'Plugin Name of the plugin/theme',
+							'Plugin URI of the plugin/theme',
+							'Author of the plugin/theme',
+							'Author URI of the plugin/theme'
+						];
 
 						for ( translation in pot.translations[''] ) {
 							if ( 'undefined' !== typeof pot.translations[''][ translation ].comments.extracted ) {
