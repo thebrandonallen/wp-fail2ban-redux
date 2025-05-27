@@ -8,13 +8,13 @@
  * Text Domain:       wp-fail2ban-redux
  * Domain Path:       /languages
  * Version:           0.9.2
- * Requires at least: 5.5
- * Requires PHP:      7.0
+ * Requires at least: 5.8
+ * Requires PHP:      7.4
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * Copyright (C) 2012-2016  Charles Lecklider (email : wordpress@charles.lecklider.org)
- * Copyright (C) 2016-2023  Brandon Allen (https://github.com/thebrandonallen)
+ * Copyright (C) 2016-2025  Brandon Allen (https://github.com/thebrandonallen)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
