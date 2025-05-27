@@ -10,6 +10,11 @@ on:
   pull_request:
     branches: [ develop ]
 
+# Cancel any in-progress runs of a workflow, per branch, if a new run is triggered,
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -21,8 +26,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.4', '8.0', '8.1', '8.2', '8.3']
-        wp_version: ['5.9', '6.0', '6.1', '6.2', '6.3', '6.4', '6.5', '6.6', 'master']
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+        wp_version: ['5.9', '6.0', '6.1', '6.2', '6.3', '6.4', '6.5', '6.6', '6.7', '6.8', 'master']
         include:
           - php: '7.2'
             wp_version: '5.4'
@@ -36,11 +41,6 @@ jobs:
       WP_PHPUNIT_DEFAULT_VERSION: '6.6'
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Cancel previous runs of this workflow
-        uses: styfle/cancel-workflow-action@0.5.0
-        with:
-          access_token: ${{ github.token }}
-
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -65,7 +65,7 @@ jobs:
         run: composer validate --strict
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v1
+        uses: ramsey/composer-install@v3
         with:
           composer-options: "--ignore-platform-reqs"
 
@@ -80,7 +80,7 @@ jobs:
           fi
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
