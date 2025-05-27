@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.9.2](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.9.2) - 2024-04-30
+### Changed
+* Add a new regex rule for XMLRPC authentication failure to both filters (soft and hard)
+
 ## [0.9.0](https://github.com/thebrandonallen/wp-fail2ban-redux/tree/0.9.0) - 2023-10-17
 ### Changed
 * Bumps "Tested up to" version to 6.4

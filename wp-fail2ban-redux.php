@@ -7,7 +7,7 @@
  * Author URI:        https://github.com/thebrandonallen
  * Text Domain:       wp-fail2ban-redux
  * Domain Path:       /languages
- * Version:           0.9.1
+ * Version:           0.9.2
  * Requires at least: 5.5
  * Requires PHP:      7.0
  * License:           GPLv2 or later

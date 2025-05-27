@@ -69,6 +69,10 @@ You need to add some code to your `wp-config.php` file. See the below links for 
 
 ## Changelog ##
 
+### 0.9.2 ###
+* Release date: 2024-04-30
+* Add a new regex rule for XMLRPC authentication failure to both filters (soft and hard)
+
 ### 0.9.1 ###
 * Release date: 2023-10-17
 * Bumps "Tested up to" version to 6.4

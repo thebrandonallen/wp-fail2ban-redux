@@ -13,3 +13,6 @@ wp-cli.local.yml
 # Operating system specific files
 .DS_Store
 Thumbs.db
+
+# IDE specific files
+.vscode 
